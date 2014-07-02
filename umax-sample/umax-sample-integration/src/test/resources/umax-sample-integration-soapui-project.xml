@@ -1,0 +1,1321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="umax-sample-integration" resourceRoot="" soapui-version="4.0.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="FinancialRiskEvaluationServiceSoapBinding" type="wsdl" bindingName="{http://service.composite.sample.umax.threeti.com/}FinancialRiskEvaluationServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:9090/services/FinancialRiskEvaluationService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:9090/services/FinancialRiskEvaluationService?wsdl"><con:part><con:url>http://localhost:9090/services/FinancialRiskEvaluationService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="FinancialRiskEvaluationService" targetNamespace="http://service.composite.sample.umax.threeti.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.composite.sample.umax.threeti.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://service.salesmockapp.sample.umax.threeti.com/" version="1.0" xmlns:tns="http://service.salesmockapp.sample.umax.threeti.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="contract" type="tns:contract"/>
+      <xs:element name="customer" type="tns:customer"/>
+      <xs:element name="getContract" type="tns:getContract"/>
+      <xs:element name="getContractResponse" type="tns:getContractResponse"/>
+      <xs:element name="getContracts" type="tns:getContracts"/>
+      <xs:element name="getContractsResponse" type="tns:getContractsResponse"/>
+      <xs:element name="saveContract" type="tns:saveContract"/>
+      <xs:element name="saveContractResponse" type="tns:saveContractResponse"/>
+      <xs:complexType name="contract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" type="xs:double"/>
+          <xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="firstParty" type="tns:customer"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="price" type="xs:double"/>
+          <xs:element minOccurs="0" name="productName" type="xs:string"/>
+          <xs:element minOccurs="0" name="quantity" type="xs:int"/>
+          <xs:element minOccurs="0" name="secondParty" type="xs:string"/>
+          <xs:element minOccurs="0" name="version" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="customer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="address" type="xs:string"/>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="phoneNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="version" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="saveContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="tns:contract"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="saveContractResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:contract"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getContractsResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:contract"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getContractResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:contract"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getContracts">
+        <xs:sequence/>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://service.financialmockapp.sample.umax.threeti.com/" version="1.0" xmlns:tns="http://service.financialmockapp.sample.umax.threeti.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="credit" type="tns:credit"/>
+      <xs:element name="customer" type="tns:customer"/>
+      <xs:element name="getCredit" type="tns:getCredit"/>
+      <xs:element name="getCreditResponse" type="tns:getCreditResponse"/>
+      <xs:element name="getCredits" type="tns:getCredits"/>
+      <xs:element name="getCreditsResponse" type="tns:getCreditsResponse"/>
+      <xs:element name="saveCredit" type="tns:saveCredit"/>
+      <xs:element name="saveCreditResponse" type="tns:saveCreditResponse"/>
+      <xs:complexType name="credit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="creditLine" type="xs:double"/>
+          <xs:element minOccurs="0" name="customer" type="tns:customer"/>
+          <xs:element minOccurs="0" name="debt" type="xs:double"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="version" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="customer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="address" type="xs:string"/>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="phoneNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="version" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getCredit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="creditId" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getCreditResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="credit" type="tns:credit"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="saveCredit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="tns:credit"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getCredits">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="getCreditsResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:credit"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="saveCreditResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:credit"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://service.composite.sample.umax.threeti.com/" version="1.0" xmlns:ns1="http://service.salesmockapp.sample.umax.threeti.com/" xmlns:ns2="http://service.financialmockapp.sample.umax.threeti.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://service.salesmockapp.sample.umax.threeti.com/"/>
+      <xs:import namespace="http://service.financialmockapp.sample.umax.threeti.com/"/>
+      <xs:element name="existCreditRisk" type="tns:existCreditRisk"/>
+      <xs:element name="existCreditRiskResponse" type="tns:existCreditRiskResponse"/>
+      <xs:complexType name="existCreditRisk">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="ns1:contract"/>
+          <xs:element minOccurs="0" name="arg1" type="ns2:credit"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="existCreditRiskResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="existCreditRiskResponse">
+    <wsdl:part element="tns:existCreditRiskResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="existCreditRisk">
+    <wsdl:part element="tns:existCreditRisk" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="FinancialRiskEvaluationService">
+    <wsdl:operation name="existCreditRisk">
+      <wsdl:input message="tns:existCreditRisk" name="existCreditRisk"></wsdl:input>
+      <wsdl:output message="tns:existCreditRiskResponse" name="existCreditRiskResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FinancialRiskEvaluationServiceSoapBinding" type="tns:FinancialRiskEvaluationService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="existCreditRisk">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="existCreditRisk">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="existCreditRiskResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FinancialRiskEvaluationService">
+    <wsdl:port binding="tns:FinancialRiskEvaluationServiceSoapBinding" name="FinancialRiskEvaluationManagerImplPort">
+      <soap:address location="http://ThinkPad-T400:9090/services/FinancialRiskEvaluationService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://ThinkPad-T400:9090/services/FinancialRiskEvaluationService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="existCreditRisk" bindingOperationName="existCreditRisk" type="Request-Response" outputName="existCreditRiskResponse" inputName="existCreditRisk" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/FinancialRiskEvaluationService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.composite.sample.umax.threeti.com/">
+   <soapenv:Header/>
+  <soapenv:Body>
+
+      <ser:existCreditRisk>
+
+         <!--Optional:-->
+
+         <arg0>
+
+            <amount>10000.0</amount>
+
+            <date>2011-01-01T00:00:00+08:00</date>
+
+            <firstParty>
+
+               <address>北京市海淀区中关村大街1800号</address>
+
+               <email>purchase@oracle.com</email>
+
+               <id>-1</id>
+
+               <name>oracle</name>
+
+               <phoneNumber>086-010-2313111</phoneNumber>
+
+               <version>1</version>
+
+            </firstParty>
+
+            <id>-1</id>
+
+            <price>2000.0</price>
+
+            <productName>ecargo</productName>
+
+            <quantity>5</quantity>
+
+            <secondParty>3ti</secondParty>
+
+            <version>1</version>
+
+         </arg0>
+
+         <!--Optional:-->
+
+         <arg1>
+
+                       <creditLine>20000.0</creditLine>
+
+            <customer>
+
+               <address>北京市海淀区中关村大街1800号</address>
+
+               <email>purchase@oracle.com</email>
+
+               <id>-1</id>
+
+               <name>oracle</name>
+
+               <phoneNumber>086-010-2313111</phoneNumber>
+
+               <version>1</version>
+
+            </customer>
+
+            <debt>10000.0</debt>
+
+            <id>-1</id>
+
+            <version>1</version>
+
+         </arg1>
+
+      </ser:existCreditRisk>
+
+   </soapenv:Body>
+
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.composite.sample.umax.threeti.com/FinancialRiskEvaluationService/existCreditRisk"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="ContractServiceSoapBinding" type="wsdl" bindingName="{http://service.salesmockapp.sample.umax.threeti.com/}ContractServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:9090/services/ContractService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:9090/services/ContractService?wsdl"><con:part><con:url>http://localhost:9090/services/ContractService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="ContractService" targetNamespace="http://service.salesmockapp.sample.umax.threeti.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.salesmockapp.sample.umax.threeti.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://service.salesmockapp.sample.umax.threeti.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="contract" type="tns:contract"/>
+      <xs:element name="customer" type="tns:customer"/>
+      <xs:element name="getContract" type="tns:getContract"/>
+      <xs:element name="getContractResponse" type="tns:getContractResponse"/>
+      <xs:element name="getContracts" type="tns:getContracts"/>
+      <xs:element name="getContractsResponse" type="tns:getContractsResponse"/>
+      <xs:element name="saveContract" type="tns:saveContract"/>
+      <xs:element name="saveContractResponse" type="tns:saveContractResponse"/>
+      <xs:complexType name="saveContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="tns:contract"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="contract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" type="xs:double"/>
+          <xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="firstParty" type="tns:customer"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="price" type="xs:double"/>
+          <xs:element minOccurs="0" name="productName" type="xs:string"/>
+          <xs:element minOccurs="0" name="quantity" type="xs:int"/>
+          <xs:element minOccurs="0" name="secondParty" type="xs:string"/>
+          <xs:element minOccurs="0" name="version" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="customer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="address" type="xs:string"/>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="phoneNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="version" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="saveContractResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:contract"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getContracts">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="getContractsResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:contract"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getContractResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:contract"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getContractsResponse">
+    <wsdl:part element="tns:getContractsResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getContractResponse">
+    <wsdl:part element="tns:getContractResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getContracts">
+    <wsdl:part element="tns:getContracts" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveContract">
+    <wsdl:part element="tns:saveContract" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getContract">
+    <wsdl:part element="tns:getContract" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveContractResponse">
+    <wsdl:part element="tns:saveContractResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ContractService">
+    <wsdl:operation name="saveContract">
+      <wsdl:input message="tns:saveContract" name="saveContract"></wsdl:input>
+      <wsdl:output message="tns:saveContractResponse" name="saveContractResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContracts">
+      <wsdl:input message="tns:getContracts" name="getContracts"></wsdl:input>
+      <wsdl:output message="tns:getContractsResponse" name="getContractsResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContract">
+      <wsdl:input message="tns:getContract" name="getContract"></wsdl:input>
+      <wsdl:output message="tns:getContractResponse" name="getContractResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ContractServiceSoapBinding" type="tns:ContractService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="saveContract">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="saveContract">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="saveContractResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContracts">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getContracts">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getContractsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContract">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getContract">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getContractResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ContractService">
+    <wsdl:port binding="tns:ContractServiceSoapBinding" name="ContractManagerImplPort">
+      <soap:address location="http://ThinkPad-T400:9090/services/ContractService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://ThinkPad-T400:9090/services/ContractService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="getContract" bindingOperationName="getContract" type="Request-Response" outputName="getContractResponse" inputName="getContract" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/ContractService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.salesmockapp.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getContract>
+         <!--Optional:-->
+         <arg0>-1</arg0>
+      </ser:getContract>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.salesmockapp.sample.umax.threeti.com/ContractService/getContract"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="getContracts" bindingOperationName="getContracts" type="Request-Response" outputName="getContractsResponse" inputName="getContracts" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/ContractService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.salesmockapp.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getContracts/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.salesmockapp.sample.umax.threeti.com/ContractService/getContracts"/></con:call></con:operation><con:operation isOneWay="false" action="" name="saveContract" bindingOperationName="saveContract" type="Request-Response" outputName="saveContractResponse" inputName="saveContract" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/ContractService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.salesmockapp.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:saveContract>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <amount>?</amount>
+            <!--Optional:-->
+            <date>?</date>
+            <!--Optional:-->
+            <firstParty>
+               <!--Optional:-->
+               <address>?</address>
+               <!--Optional:-->
+               <email>?</email>
+               <!--Optional:-->
+               <id>?</id>
+               <!--Optional:-->
+               <name>?</name>
+               <!--Optional:-->
+               <phoneNumber>?</phoneNumber>
+               <!--Optional:-->
+               <version>?</version>
+            </firstParty>
+            <!--Optional:-->
+            <id>?</id>
+            <!--Optional:-->
+            <price>?</price>
+            <!--Optional:-->
+            <productName>?</productName>
+            <!--Optional:-->
+            <quantity>?</quantity>
+            <!--Optional:-->
+            <secondParty>?</secondParty>
+            <!--Optional:-->
+            <version>?</version>
+         </arg0>
+      </ser:saveContract>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.salesmockapp.sample.umax.threeti.com/ContractService/saveContract"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="CreditServiceSoapBinding" type="wsdl" bindingName="{http://service.financialmockapp.sample.umax.threeti.com/}CreditServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:9090/services/CreditService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:9090/services/CreditService?wsdl"><con:part><con:url>http://localhost:9090/services/CreditService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="CreditService" targetNamespace="http://service.financialmockapp.sample.umax.threeti.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.financialmockapp.sample.umax.threeti.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://service.financialmockapp.sample.umax.threeti.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="credit" type="tns:credit"/>
+      <xs:element name="customer" type="tns:customer"/>
+      <xs:element name="getCredit" type="tns:getCredit"/>
+      <xs:element name="getCreditResponse" type="tns:getCreditResponse"/>
+      <xs:element name="getCredits" type="tns:getCredits"/>
+      <xs:element name="getCreditsResponse" type="tns:getCreditsResponse"/>
+      <xs:element name="saveCredit" type="tns:saveCredit"/>
+      <xs:element name="saveCreditResponse" type="tns:saveCreditResponse"/>
+      <xs:complexType name="saveCredit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="tns:credit"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="credit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="creditLine" type="xs:double"/>
+          <xs:element minOccurs="0" name="customer" type="tns:customer"/>
+          <xs:element minOccurs="0" name="debt" type="xs:double"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="version" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="customer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="address" type="xs:string"/>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="phoneNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="version" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="saveCreditResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:credit"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getCredits">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="getCreditsResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:credit"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getCredit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="creditId" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getCreditResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="credit" type="tns:credit"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="saveCreditResponse">
+    <wsdl:part element="tns:saveCreditResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCreditsResponse">
+    <wsdl:part element="tns:getCreditsResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCreditResponse">
+    <wsdl:part element="tns:getCreditResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCredits">
+    <wsdl:part element="tns:getCredits" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveCredit">
+    <wsdl:part element="tns:saveCredit" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCredit">
+    <wsdl:part element="tns:getCredit" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CreditService">
+    <wsdl:operation name="saveCredit">
+      <wsdl:input message="tns:saveCredit" name="saveCredit"></wsdl:input>
+      <wsdl:output message="tns:saveCreditResponse" name="saveCreditResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCredits">
+      <wsdl:input message="tns:getCredits" name="getCredits"></wsdl:input>
+      <wsdl:output message="tns:getCreditsResponse" name="getCreditsResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCredit">
+      <wsdl:input message="tns:getCredit" name="getCredit"></wsdl:input>
+      <wsdl:output message="tns:getCreditResponse" name="getCreditResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CreditServiceSoapBinding" type="tns:CreditService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="saveCredit">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="saveCredit">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="saveCreditResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCredits">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCredits">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCreditsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCredit">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCredit">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCreditResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CreditService">
+    <wsdl:port binding="tns:CreditServiceSoapBinding" name="CreditManagerImplPort">
+      <soap:address location="http://ThinkPad-T400:9090/services/CreditService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://ThinkPad-T400:9090/services/CreditService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="getCredit" bindingOperationName="getCredit" type="Request-Response" outputName="getCreditResponse" inputName="getCredit" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/CreditService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.financialmockapp.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getCredit>
+         <!--Optional:-->
+         <creditId>-1</creditId>
+      </ser:getCredit>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.financialmockapp.sample.umax.threeti.com/CreditService/getCredit"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="getCredits" bindingOperationName="getCredits" type="Request-Response" outputName="getCreditsResponse" inputName="getCredits" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/CreditService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.financialmockapp.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getCredits/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.financialmockapp.sample.umax.threeti.com/CreditService/getCredits"/></con:call></con:operation><con:operation isOneWay="false" action="" name="saveCredit" bindingOperationName="saveCredit" type="Request-Response" outputName="saveCreditResponse" inputName="saveCredit" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/CreditService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.financialmockapp.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:saveCredit>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <creditLine>?</creditLine>
+            <!--Optional:-->
+            <customer>
+               <!--Optional:-->
+               <address>?</address>
+               <!--Optional:-->
+               <email>?</email>
+               <!--Optional:-->
+               <id>?</id>
+               <!--Optional:-->
+               <name>?</name>
+               <!--Optional:-->
+               <phoneNumber>?</phoneNumber>
+               <!--Optional:-->
+               <version>?</version>
+            </customer>
+            <!--Optional:-->
+            <debt>?</debt>
+            <!--Optional:-->
+            <id>?</id>
+            <!--Optional:-->
+            <version>?</version>
+         </arg0>
+      </ser:saveCredit>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.financialmockapp.sample.umax.threeti.com/CreditService/saveCredit"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="UserServiceSoapBinding" type="wsdl" bindingName="{http://service.security.sample.umax.threeti.com/}UserServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:9090/services/UserService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:9090/services/UserService?wsdl"><con:part><con:url>http://localhost:9090/services/UserService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="UserService" targetNamespace="http://service.security.sample.umax.threeti.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.security.sample.umax.threeti.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://service.security.sample.umax.threeti.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="authenticate" type="tns:authenticate"/>
+      <xs:element name="authenticateResponse" type="tns:authenticateResponse"/>
+      <xs:element name="getUser" type="tns:getUser"/>
+      <xs:element name="getUserByUsername" type="tns:getUserByUsername"/>
+      <xs:element name="getUserByUsernameResponse" type="tns:getUserByUsernameResponse"/>
+      <xs:element name="getUserResponse" type="tns:getUserResponse"/>
+      <xs:element name="getUsers" type="tns:getUsers"/>
+      <xs:element name="getUsersResponse" type="tns:getUsersResponse"/>
+      <xs:element name="removeUser" type="tns:removeUser"/>
+      <xs:element name="removeUserResponse" type="tns:removeUserResponse"/>
+      <xs:element name="saveUser" type="tns:saveUser"/>
+      <xs:element name="saveUserResponse" type="tns:saveUserResponse"/>
+      <xs:element name="user" type="tns:user"/>
+      <xs:complexType name="getUserByUsername">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getUserByUsernameResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:user"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="user">
+        <xs:complexContent>
+          <xs:extension base="tns:baseObject">
+            <xs:sequence>
+              <xs:element name="accountExpired" type="xs:boolean"/>
+              <xs:element name="accountLocked" type="xs:boolean"/>
+              <xs:element minOccurs="0" name="address" type="tns:address"/>
+              <xs:element name="credentialsExpired" type="xs:boolean"/>
+              <xs:element minOccurs="0" name="email" type="xs:string"/>
+              <xs:element name="enabled" type="xs:boolean"/>
+              <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+              <xs:element minOccurs="0" name="id" type="xs:long"/>
+              <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+              <xs:element minOccurs="0" name="phoneNumber" type="xs:string"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="roles" nillable="true" type="tns:role"/>
+              <xs:element minOccurs="0" name="username" type="xs:string"/>
+              <xs:element minOccurs="0" name="version" type="xs:int"/>
+              <xs:element minOccurs="0" name="website" type="xs:string"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType abstract="true" name="baseObject">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="address">
+        <xs:complexContent>
+          <xs:extension base="tns:baseObject">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="address" type="xs:string"/>
+              <xs:element minOccurs="0" name="city" type="xs:string"/>
+              <xs:element minOccurs="0" name="country" type="xs:string"/>
+              <xs:element minOccurs="0" name="postalCode" type="xs:string"/>
+              <xs:element minOccurs="0" name="province" type="xs:string"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="role">
+        <xs:complexContent>
+          <xs:extension base="tns:baseObject">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="description" type="xs:string"/>
+              <xs:element minOccurs="0" name="id" type="xs:long"/>
+              <xs:element minOccurs="0" name="name" type="xs:string"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="removeUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="removeUserResponse">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="authenticate">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+          <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="authenticateResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="saveUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="tns:user"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="saveUserResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:user"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getUserResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:user"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getUsers">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="getUsersResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:user"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="UserExistsException" type="tns:UserExistsException"/>
+      <xs:complexType name="UserExistsException">
+        <xs:sequence/>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getUserByUsername">
+    <wsdl:part element="tns:getUserByUsername" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUserByUsernameResponse">
+    <wsdl:part element="tns:getUserByUsernameResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="removeUserResponse">
+    <wsdl:part element="tns:removeUserResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUser">
+    <wsdl:part element="tns:getUser" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUsersResponse">
+    <wsdl:part element="tns:getUsersResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UserExistsException">
+    <wsdl:part element="tns:UserExistsException" name="UserExistsException"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveUser">
+    <wsdl:part element="tns:saveUser" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="authenticate">
+    <wsdl:part element="tns:authenticate" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveUserResponse">
+    <wsdl:part element="tns:saveUserResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUserResponse">
+    <wsdl:part element="tns:getUserResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="authenticateResponse">
+    <wsdl:part element="tns:authenticateResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUsers">
+    <wsdl:part element="tns:getUsers" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="removeUser">
+    <wsdl:part element="tns:removeUser" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="UserService">
+    <wsdl:operation name="getUserByUsername">
+      <wsdl:input message="tns:getUserByUsername" name="getUserByUsername"></wsdl:input>
+      <wsdl:output message="tns:getUserByUsernameResponse" name="getUserByUsernameResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeUser">
+      <wsdl:input message="tns:removeUser" name="removeUser"></wsdl:input>
+      <wsdl:output message="tns:removeUserResponse" name="removeUserResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="authenticate">
+      <wsdl:input message="tns:authenticate" name="authenticate"></wsdl:input>
+      <wsdl:output message="tns:authenticateResponse" name="authenticateResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveUser">
+      <wsdl:input message="tns:saveUser" name="saveUser"></wsdl:input>
+      <wsdl:output message="tns:saveUserResponse" name="saveUserResponse"></wsdl:output>
+      <wsdl:fault message="tns:UserExistsException" name="UserExistsException"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getUser">
+      <wsdl:input message="tns:getUser" name="getUser"></wsdl:input>
+      <wsdl:output message="tns:getUserResponse" name="getUserResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUsers">
+      <wsdl:input message="tns:getUsers" name="getUsers"></wsdl:input>
+      <wsdl:output message="tns:getUsersResponse" name="getUsersResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UserServiceSoapBinding" type="tns:UserService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getUserByUsername">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getUserByUsername">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUserByUsernameResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="authenticate">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="authenticate">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="authenticateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeUser">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="removeUser">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="removeUserResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveUser">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="saveUser">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="saveUserResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UserExistsException">
+        <soap:fault name="UserExistsException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getUser">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getUser">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUserResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUsers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getUsers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUsersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UserService">
+    <wsdl:port binding="tns:UserServiceSoapBinding" name="UserManagerImplPort">
+      <soap:address location="http://ThinkPad-T400:9090/services/UserService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://ThinkPad-T400:9090/services/UserService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="authenticate" bindingOperationName="authenticate" type="Request-Response" outputName="authenticateResponse" inputName="authenticate" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/UserService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.security.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:authenticate>
+         <!--Optional:-->
+         <arg0>user</arg0>
+         <!--Optional:-->
+         <arg1>user</arg1>
+      </ser:authenticate>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.security.sample.umax.threeti.com/UserService/authenticate"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="getUser" bindingOperationName="getUser" type="Request-Response" outputName="getUserResponse" inputName="getUser" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/UserService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.security.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getUser>
+         <!--Optional:-->
+         <arg0>?</arg0>
+      </ser:getUser>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.security.sample.umax.threeti.com/UserService/getUser"/></con:call></con:operation><con:operation isOneWay="false" action="" name="getUserByUsername" bindingOperationName="getUserByUsername" type="Request-Response" outputName="getUserByUsernameResponse" inputName="getUserByUsername" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/UserService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.security.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getUserByUsername>
+         <!--Optional:-->
+         <arg0>?</arg0>
+      </ser:getUserByUsername>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.security.sample.umax.threeti.com/UserService/getUserByUsername"/></con:call></con:operation><con:operation isOneWay="false" action="" name="getUsers" bindingOperationName="getUsers" type="Request-Response" outputName="getUsersResponse" inputName="getUsers" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/UserService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.security.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getUsers/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.security.sample.umax.threeti.com/UserService/getUsers"/></con:call></con:operation><con:operation isOneWay="false" action="" name="removeUser" bindingOperationName="removeUser" type="Request-Response" outputName="removeUserResponse" inputName="removeUser" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/UserService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.security.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:removeUser>
+         <!--Optional:-->
+         <arg0>?</arg0>
+      </ser:removeUser>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.security.sample.umax.threeti.com/UserService/removeUser"/></con:call></con:operation><con:operation isOneWay="false" action="" name="saveUser" bindingOperationName="saveUser" type="Request-Response" outputName="saveUserResponse" inputName="saveUser" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/UserService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.security.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:saveUser>
+         <!--Optional:-->
+         <arg0>
+            <accountExpired>?</accountExpired>
+            <accountLocked>?</accountLocked>
+            <!--Optional:-->
+            <address>
+               <!--Optional:-->
+               <address>?</address>
+               <!--Optional:-->
+               <city>?</city>
+               <!--Optional:-->
+               <country>?</country>
+               <!--Optional:-->
+               <postalCode>?</postalCode>
+               <!--Optional:-->
+               <province>?</province>
+            </address>
+            <credentialsExpired>?</credentialsExpired>
+            <!--Optional:-->
+            <email>?</email>
+            <enabled>?</enabled>
+            <!--Optional:-->
+            <firstName>?</firstName>
+            <!--Optional:-->
+            <id>?</id>
+            <!--Optional:-->
+            <lastName>?</lastName>
+            <!--Optional:-->
+            <phoneNumber>?</phoneNumber>
+            <!--Zero or more repetitions:-->
+            <roles>
+               <!--Optional:-->
+               <description>?</description>
+               <!--Optional:-->
+               <id>?</id>
+               <!--Optional:-->
+               <name>?</name>
+            </roles>
+            <!--Optional:-->
+            <username>?</username>
+            <!--Optional:-->
+            <version>?</version>
+            <!--Optional:-->
+            <website>?</website>
+         </arg0>
+      </ser:saveUser>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.security.sample.umax.threeti.com/UserService/saveUser"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="TaskServiceSoapBinding" type="wsdl" bindingName="{http://service.workflow.sample.umax.threeti.com/}TaskServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:9090/services/TaskService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:9090/services/TaskService?wsdl"><con:part><con:url>http://localhost:9090/services/TaskService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="TaskService" targetNamespace="http://service.workflow.sample.umax.threeti.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.workflow.sample.umax.threeti.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://service.workflow.sample.umax.threeti.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="claim" type="tns:claim"/>
+      <xs:element name="claimResponse" type="tns:claimResponse"/>
+      <xs:element name="complete" type="tns:complete"/>
+      <xs:element name="completeResponse" type="tns:completeResponse"/>
+      <xs:element name="completeWithVariables" type="tns:completeWithVariables"/>
+      <xs:element name="completeWithVariablesResponse" type="tns:completeWithVariablesResponse"/>
+      <xs:element name="getTasks" type="tns:getTasks"/>
+      <xs:element name="getTasksResponse" type="tns:getTasksResponse"/>
+      <xs:element name="getVariable" type="tns:getVariable"/>
+      <xs:element name="getVariableResponse" type="tns:getVariableResponse"/>
+      <xs:element name="getVariables" type="tns:getVariables"/>
+      <xs:element name="getVariablesResponse" type="tns:getVariablesResponse"/>
+      <xs:element name="startProcessInstanceByKey" type="tns:startProcessInstanceByKey"/>
+      <xs:element name="startProcessInstanceByKeyResponse" type="tns:startProcessInstanceByKeyResponse"/>
+      <xs:element name="startProcessInstanceByKeyWithVariables" type="tns:startProcessInstanceByKeyWithVariables"/>
+      <xs:element name="startProcessInstanceByKeyWithVariablesResponse" type="tns:startProcessInstanceByKeyWithVariablesResponse"/>
+      <xs:complexType name="getTasks">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="arg1" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getTasksResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:task"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="task">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="assignee" type="xs:string"/>
+          <xs:element minOccurs="0" name="createTime" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="description" type="xs:string"/>
+          <xs:element minOccurs="0" name="executionId" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:string"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="processDefinitionId" type="xs:string"/>
+          <xs:element minOccurs="0" name="processInstanceId" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getVariables">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getVariablesResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:VariableMap"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VariableMap">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="entry" type="tns:KeyValueEntry"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="KeyValueEntry">
+        <xs:sequence>
+          <xs:element name="key" type="xs:string"/>
+          <xs:element minOccurs="0" name="value" type="xs:anyType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="startProcessInstanceByKey">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="startProcessInstanceByKeyResponse">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="complete">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="completeResponse">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="claim">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+          <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="claimResponse">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="startProcessInstanceByKeyWithVariables">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+          <xs:element minOccurs="0" name="arg1" type="tns:VariableMap"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="startProcessInstanceByKeyWithVariablesResponse">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="getVariable">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+          <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getVariableResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:anyType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="completeWithVariables">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+          <xs:element minOccurs="0" name="arg1" type="tns:VariableMap"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="completeWithVariablesResponse">
+        <xs:sequence/>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getVariablesResponse">
+    <wsdl:part element="tns:getVariablesResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="startProcessInstanceByKeyResponse">
+    <wsdl:part element="tns:startProcessInstanceByKeyResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getVariableResponse">
+    <wsdl:part element="tns:getVariableResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="claim">
+    <wsdl:part element="tns:claim" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getVariable">
+    <wsdl:part element="tns:getVariable" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="complete">
+    <wsdl:part element="tns:complete" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="completeResponse">
+    <wsdl:part element="tns:completeResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="startProcessInstanceByKeyWithVariablesResponse">
+    <wsdl:part element="tns:startProcessInstanceByKeyWithVariablesResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="completeWithVariables">
+    <wsdl:part element="tns:completeWithVariables" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="claimResponse">
+    <wsdl:part element="tns:claimResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTasksResponse">
+    <wsdl:part element="tns:getTasksResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTasks">
+    <wsdl:part element="tns:getTasks" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="startProcessInstanceByKey">
+    <wsdl:part element="tns:startProcessInstanceByKey" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="startProcessInstanceByKeyWithVariables">
+    <wsdl:part element="tns:startProcessInstanceByKeyWithVariables" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="completeWithVariablesResponse">
+    <wsdl:part element="tns:completeWithVariablesResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getVariables">
+    <wsdl:part element="tns:getVariables" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="TaskService">
+    <wsdl:operation name="getTasks">
+      <wsdl:input message="tns:getTasks" name="getTasks"></wsdl:input>
+      <wsdl:output message="tns:getTasksResponse" name="getTasksResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVariables">
+      <wsdl:input message="tns:getVariables" name="getVariables"></wsdl:input>
+      <wsdl:output message="tns:getVariablesResponse" name="getVariablesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="startProcessInstanceByKey">
+      <wsdl:input message="tns:startProcessInstanceByKey" name="startProcessInstanceByKey"></wsdl:input>
+      <wsdl:output message="tns:startProcessInstanceByKeyResponse" name="startProcessInstanceByKeyResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="complete">
+      <wsdl:input message="tns:complete" name="complete"></wsdl:input>
+      <wsdl:output message="tns:completeResponse" name="completeResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="claim">
+      <wsdl:input message="tns:claim" name="claim"></wsdl:input>
+      <wsdl:output message="tns:claimResponse" name="claimResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="startProcessInstanceByKeyWithVariables">
+      <wsdl:input message="tns:startProcessInstanceByKeyWithVariables" name="startProcessInstanceByKeyWithVariables"></wsdl:input>
+      <wsdl:output message="tns:startProcessInstanceByKeyWithVariablesResponse" name="startProcessInstanceByKeyWithVariablesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVariable">
+      <wsdl:input message="tns:getVariable" name="getVariable"></wsdl:input>
+      <wsdl:output message="tns:getVariableResponse" name="getVariableResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="completeWithVariables">
+      <wsdl:input message="tns:completeWithVariables" name="completeWithVariables"></wsdl:input>
+      <wsdl:output message="tns:completeWithVariablesResponse" name="completeWithVariablesResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TaskServiceSoapBinding" type="tns:TaskService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getTasks">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getTasks">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getTasksResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVariables">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getVariables">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getVariablesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="complete">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="complete">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="completeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="startProcessInstanceByKey">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="startProcessInstanceByKey">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="startProcessInstanceByKeyResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="claim">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="claim">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="claimResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="startProcessInstanceByKeyWithVariables">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="startProcessInstanceByKeyWithVariables">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="startProcessInstanceByKeyWithVariablesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVariable">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getVariable">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getVariableResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="completeWithVariables">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="completeWithVariables">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="completeWithVariablesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TaskService">
+    <wsdl:port binding="tns:TaskServiceSoapBinding" name="TaskServiceImplPort">
+      <soap:address location="http://ThinkPad-T400:9090/services/TaskService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://ThinkPad-T400:9090/services/TaskService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="claim" bindingOperationName="claim" type="Request-Response" outputName="claimResponse" inputName="claim" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/TaskService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.workflow.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:claim>
+         <!--Optional:-->
+         <arg0>?</arg0>
+         <!--Optional:-->
+         <arg1>?</arg1>
+      </ser:claim>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.workflow.sample.umax.threeti.com/TaskService/claim"/></con:call></con:operation><con:operation isOneWay="false" action="" name="complete" bindingOperationName="complete" type="Request-Response" outputName="completeResponse" inputName="complete" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/TaskService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.workflow.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:complete>
+         <!--Optional:-->
+         <arg0>?</arg0>
+      </ser:complete>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.workflow.sample.umax.threeti.com/TaskService/complete"/></con:call></con:operation><con:operation isOneWay="false" action="" name="completeWithVariables" bindingOperationName="completeWithVariables" type="Request-Response" outputName="completeWithVariablesResponse" inputName="completeWithVariables" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/TaskService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.workflow.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:completeWithVariables>
+         <!--Optional:-->
+         <arg0>?</arg0>
+         <!--Optional:-->
+         <arg1>
+            <!--Zero or more repetitions:-->
+            <entry>
+               <key>?</key>
+               <!--Optional:-->
+               <value>?</value>
+            </entry>
+         </arg1>
+      </ser:completeWithVariables>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.workflow.sample.umax.threeti.com/TaskService/completeWithVariables"/></con:call></con:operation><con:operation isOneWay="false" action="" name="getTasks" bindingOperationName="getTasks" type="Request-Response" outputName="getTasksResponse" inputName="getTasks" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/TaskService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.workflow.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getTasks>
+         <!--Optional:-->
+         <arg0>-1</arg0>
+         <!--Zero or more repetitions:-->
+         <arg1>-1</arg1>
+      </ser:getTasks>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.workflow.sample.umax.threeti.com/TaskService/getTasks"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="getVariable" bindingOperationName="getVariable" type="Request-Response" outputName="getVariableResponse" inputName="getVariable" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/TaskService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.workflow.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getVariable>
+         <!--Optional:-->
+         <arg0>?</arg0>
+         <!--Optional:-->
+         <arg1>?</arg1>
+      </ser:getVariable>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.workflow.sample.umax.threeti.com/TaskService/getVariable"/></con:call></con:operation><con:operation isOneWay="false" action="" name="getVariables" bindingOperationName="getVariables" type="Request-Response" outputName="getVariablesResponse" inputName="getVariables" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/TaskService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.workflow.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getVariables>
+         <!--Optional:-->
+         <arg0>?</arg0>
+      </ser:getVariables>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.workflow.sample.umax.threeti.com/TaskService/getVariables"/></con:call></con:operation><con:operation isOneWay="false" action="" name="startProcessInstanceByKey" bindingOperationName="startProcessInstanceByKey" type="Request-Response" outputName="startProcessInstanceByKeyResponse" inputName="startProcessInstanceByKey" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/TaskService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.workflow.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:startProcessInstanceByKey>
+         <!--Optional:-->
+         <arg0>ExamineContractProcess</arg0>
+      </ser:startProcessInstanceByKey>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.workflow.sample.umax.threeti.com/TaskService/startProcessInstanceByKey"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="startProcessInstanceByKeyWithVariables" bindingOperationName="startProcessInstanceByKeyWithVariables" type="Request-Response" outputName="startProcessInstanceByKeyWithVariablesResponse" inputName="startProcessInstanceByKeyWithVariables" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ThinkPad-T400:9090/services/TaskService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.workflow.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:startProcessInstanceByKeyWithVariables>
+         <!--Optional:-->
+         <arg0>?</arg0>
+         <!--Optional:-->
+         <arg1>
+            <!--Zero or more repetitions:-->
+            <entry>
+               <key>ExamineContractProcess</key>
+               <!--Optional:-->
+               <value></value>
+            </entry>
+         </arg1>
+      </ser:startProcessInstanceByKeyWithVariables>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.workflow.sample.umax.threeti.com/TaskService/startProcessInstanceByKeyWithVariables"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

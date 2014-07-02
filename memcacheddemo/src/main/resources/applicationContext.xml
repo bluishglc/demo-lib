@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+ 	<context:annotation-config/>
+ 	
+ 	<context:component-scan base-package="net.sf.memcacheddemo"/>
+ 	
+ 	<!-- 
+ 	Default settings of SockIOPool:
+ 	
+ 	private int poolMultiplier = 3;
+	private int initConn = 10;
+	private int minConn = 5;
+	private int maxConn = 100;
+	private long maxIdle = 1000 * 60 * 5; // max idle time for avail sockets
+	private long maxBusyTime = 1000 * 30; // max idle time for avail sockets
+	private long maintSleep = 1000 * 30; // maintenance thread sleep time
+	private int socketTO = 1000 * 3; // default timeout of socket reads
+	private int socketConnectTO = 1000 * 3; // default timeout of socket connections
+	private boolean aliveCheck = false; // default to not check each connection for being alive
+	private boolean failover = true; // default to failover in event of cache server dead
+	private boolean failback = true; // only used if failover is also set ... controls putting a dead server back into rotation
+	private boolean nagle = false; // enable/disable Nagle's algorithm
+	private int hashingAlg = NATIVE_HASH; // default to using the native hash as it is the fastest 	
+ 	 -->
+
+	<bean id="memcachedPool" class="com.danga.MemCached.SockIOPool"
+		factory-method="getInstance" init-method="initialize" destroy-method="shutDown">
+		<constructor-arg>
+			<value>defaultMemcachedPool</value> <!-- The pool name -->
+		</constructor-arg>
+		<property name="servers">
+			<list>
+				<value>127.0.0.1:11211</value>
+				<value>127.0.0.1:11212</value>
+			</list>
+		</property>
+		<property name="initConn" value="20"/>
+		<property name="minConn" value="10"/>
+		<property name="maxConn" value="50"/>
+		<property name="maintSleep" value="30"/>
+		<property name="nagle" value="false"/>
+		<property name="socketTO" value="3000"/>
+		<property name="failover" value="true"/>
+		<property name="aliveCheck" value="true"/>
+	</bean>
+
+	<bean id="memcachedClient" class="com.danga.MemCached.MemCachedClient">
+		<constructor-arg>
+			<value>defaultMemcachedPool</value> <!-- The pool name -->
+		</constructor-arg>
+	</bean>
+
+</beans>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="50" height="55" xmlns:vo="com.threeti.UMax.main.vo.*">
+	<fx:Declarations>
+		
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.adobe.cairngorm.view.ViewLocator;
+			import com.threeti.UMax.main.view.MainViewHelper;
+			import com.threeti.UMax.main.vo.AppItemVO;
+			
+			public var appVO:AppItemVO;
+			
+			private function doubleClicked():void
+			{
+				var mainViewHelper:MainViewHelper = 
+					ViewLocator.getInstance().getViewHelper(MainViewHelper.MAIN_VIEW) as MainViewHelper;
+				mainViewHelper.newAppView(appVO);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	
+	<mx:Image id="icon" width="50" doubleClick="doubleClicked()" doubleClickEnabled="true"/>
+	<s:Label id="lable" width="50" maxHeight="50"/>
+	
+</s:Group>

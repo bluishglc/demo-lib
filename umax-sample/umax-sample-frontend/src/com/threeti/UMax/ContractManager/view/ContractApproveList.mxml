@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:presentation="com.threeti.umax.sample.contract.presentation.*"
+		 width="865" height="485" xmlns:view="com.threeti.UMax.ContractManager.view.*">
+	<fx:Declarations>
+		<mx:DateFormatter id="Former" formatString="YYYY-DD-MM" />
+		<s:WebService id="contractService" wsdl="http://localhost:9090/services/ContractServices?wsdl">
+			<s:operation name="getContracts" resultFormat="object" fault="operation1_faultHandler(event)"
+						  result="operation1_resultHandler(event)">
+			</s:operation>
+		</s:WebService>
+		
+		<s:WebService id="getCustomer" wsdl="http://localhost:9090/services/ContractServices?wsdl">
+			<s:operation name="customer" resultFormat="object" fault="operation2_faultHandler(event)"
+						 result="operation2_resultHandler(event)" >
+			</s:operation>
+		</s:WebService>
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.threeti.umax.sample.contract.domain.Contract;
+			import mx.collections.IList;
+			import mx.controls.Alert;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			[Bindable]
+			public var _contracts:IList;
+			public var contid:int;
+			protected function viewContractHandler(event:MouseEvent):void
+			{
+				//openApproveView(contractDG.selectedItem as Contract);
+				
+				var check:int=this.contractDG.selectedIndex;
+
+					var item:Object=this.contractDG.selectedItem;
+					contid=item.id;
+					openApproveView(contractDG.selectedItem.object as Object);
+				
+			}
+			
+			private function openApproveView(object:Object):void
+			{
+				for each (var contract:Contract in object)
+				{
+					contract.id = object.id;
+					contract.version = object.version;
+					contract.firstParty = object.firstParty;
+					contract.secondParty = object.secondParty;
+					contract.productName = object.productName;
+					contract.price = object.price;
+					contract.quantity = object.quantity;
+					contract.amount = object.amount;
+					contract.date = object.date;
+					contract.state = object.state;
+				}
+				contractApproveVS.selectedIndex = 1;
+				var contractApprove:ContractApprove = new ContractApprove();
+				contractApprove.contract = contract;
+				//contractApprove.contract = contract;
+			}
+			
+			protected function backToListHandler(event:Event):void
+			{
+				contractApproveVS.selectedIndex = 0;
+			}
+			
+			protected function operation1_faultHandler(event:FaultEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			protected function operation1_resultHandler(event:ResultEvent):void
+			{
+				
+				_contracts=event.result as IList;
+			}
+			
+			protected function searchHandler(event:MouseEvent):void
+			{
+				contractService.getContracts();
+				
+			}
+			public function former(item:Object,clun:GridColumn):String
+			{
+			return Former.format(item.date);
+			
+			}
+			
+			protected function operation2_faultHandler(event:FaultEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			protected function operation2_resultHandler(event:ResultEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<mx:ViewStack id="contractApproveVS" width="100%" height="100%">
+		<s:NavigatorContent>
+			<s:layout>
+				<s:VerticalLayout gap="0" />
+			</s:layout>
+			
+			<s:Form width="100%">
+				<s:layout>
+					<s:BasicLayout />
+				</s:layout>
+				<s:FormItem x="90" y="0" label="客户名称:">
+					<s:TextInput width="210"/>
+				</s:FormItem>
+				<s:FormItem x="440" y="0" label="合同编号:">
+					<s:TextInput width="210"/>
+				</s:FormItem>
+				<s:FormItem x="90" y="50" label="甲方代表:">
+					<s:TextInput width="210"/>
+				</s:FormItem>
+				<s:FormItem x="440" y="50" label="乙方代表:">
+					<s:TextInput width="210"/>
+				</s:FormItem>
+				<s:FormItem x="90" y="102" label="提交日期:">
+					<s:layout>
+						<s:HorizontalLayout verticalAlign="middle" />
+					</s:layout>
+					<mx:DateField />
+					<s:Label text="至"/>
+					<mx:DateField />
+				</s:FormItem>
+				<s:FormItem x="463" y="102" label="状态:">
+					<s:DropDownList width="212"/>
+				</s:FormItem>
+				<s:FormItem x="632" y="154">
+					<s:Button label="搜索" click="searchHandler(event)" />
+				</s:FormItem>
+			</s:Form>
+			
+			<s:Group width="100%">
+				<s:layout>
+					<s:HorizontalLayout paddingLeft="20" paddingTop="5" paddingBottom="5" />
+				</s:layout>
+				<s:Button label="查看" enabled="{contractDG.selectedIndex > -1}"
+						  click="viewContractHandler(event)" />
+				<s:Button label="打印" />
+				<s:Button label="导出" />
+			</s:Group>
+			
+			<s:Group width="100%" height="100%">
+				<s:DataGrid id="contractDG" x="20" y="10" width="830" height="220" dataProvider="{_contracts}" >
+					<s:columns>
+						<s:ArrayList>
+							<s:GridColumn  dataField="id" visible="false" />
+							<s:GridColumn headerText="合同编号" dataField="version" />
+							<s:GridColumn headerText="客户名称" dataField="customer.name" />
+							<s:GridColumn headerText="甲方代表" dataField="firstParty" />
+							<s:GridColumn headerText="乙方代表"  dataField="secondParty"/>
+							<s:GridColumn headerText="产品名称" dataField="productName" />
+							<s:GridColumn headerText="产品单价(元)" dataField="price" />
+							<s:GridColumn headerText="产品数量(个)" dataField="quantity" />
+							<s:GridColumn headerText="总金额"  dataField="amount"/>
+							<s:GridColumn headerText="签订日期"  dataField="date" labelFunction="former"/>
+							<s:GridColumn headerText="状态" width="50" dataField="state" />
+						</s:ArrayList>
+					</s:columns>
+				</s:DataGrid>
+			</s:Group>
+		</s:NavigatorContent>
+		<s:NavigatorContent>
+			<presentation:ContractApprove id="contractApprove" width="100%" height="100%"
+										  back="backToListHandler(event)"/>
+		</s:NavigatorContent>
+	</mx:ViewStack>
+</s:Group>

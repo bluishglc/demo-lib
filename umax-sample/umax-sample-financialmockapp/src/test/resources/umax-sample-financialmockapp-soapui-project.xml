@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="umax-sample-financialmockapp" resourceRoot="" soapui-version="4.0.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="CreditServiceSoapBinding" type="wsdl" bindingName="{http://service.financialmockapp.sample.umax.threeti.com/}CreditServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:7070/umax-sample-financialmockapp/services/CreditService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:7070/umax-sample-financialmockapp/services/CreditService?wsdl"><con:part><con:url>http://localhost:7070/umax-sample-financialmockapp/services/CreditService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="CreditService" targetNamespace="http://service.financialmockapp.sample.umax.threeti.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.financialmockapp.sample.umax.threeti.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://service.financialmockapp.sample.umax.threeti.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="credit" type="tns:credit"/>
+      <xs:element name="customer" type="tns:customer"/>
+      <xs:element name="getCredit" type="tns:getCredit"/>
+      <xs:element name="getCreditResponse" type="tns:getCreditResponse"/>
+      <xs:element name="getCredits" type="tns:getCredits"/>
+      <xs:element name="getCreditsResponse" type="tns:getCreditsResponse"/>
+      <xs:element name="getCustomerCredit" type="tns:getCustomerCredit"/>
+      <xs:element name="getCustomerCreditResponse" type="tns:getCustomerCreditResponse"/>
+      <xs:element name="saveCredit" type="tns:saveCredit"/>
+      <xs:element name="saveCreditResponse" type="tns:saveCreditResponse"/>
+      <xs:complexType name="saveCredit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="tns:credit"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="credit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="creditLine" type="xs:double"/>
+          <xs:element minOccurs="0" name="customer" type="tns:customer"/>
+          <xs:element minOccurs="0" name="debt" type="xs:double"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="version" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="customer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="address" type="xs:string"/>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="phoneNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="version" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="saveCreditResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:credit"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getCustomerCredit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="customerId" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getCustomerCreditResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="credit" type="tns:credit"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getCredits">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="getCreditsResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:credit"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getCredit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="creditId" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getCreditResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="credit" type="tns:credit"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="saveCreditResponse">
+    <wsdl:part element="tns:saveCreditResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCustomerCredit">
+    <wsdl:part element="tns:getCustomerCredit" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCreditsResponse">
+    <wsdl:part element="tns:getCreditsResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCustomerCreditResponse">
+    <wsdl:part element="tns:getCustomerCreditResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCreditResponse">
+    <wsdl:part element="tns:getCreditResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCredits">
+    <wsdl:part element="tns:getCredits" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveCredit">
+    <wsdl:part element="tns:saveCredit" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCredit">
+    <wsdl:part element="tns:getCredit" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CreditService">
+    <wsdl:operation name="saveCredit">
+      <wsdl:input message="tns:saveCredit" name="saveCredit"></wsdl:input>
+      <wsdl:output message="tns:saveCreditResponse" name="saveCreditResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCustomerCredit">
+      <wsdl:input message="tns:getCustomerCredit" name="getCustomerCredit"></wsdl:input>
+      <wsdl:output message="tns:getCustomerCreditResponse" name="getCustomerCreditResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCredits">
+      <wsdl:input message="tns:getCredits" name="getCredits"></wsdl:input>
+      <wsdl:output message="tns:getCreditsResponse" name="getCreditsResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCredit">
+      <wsdl:input message="tns:getCredit" name="getCredit"></wsdl:input>
+      <wsdl:output message="tns:getCreditResponse" name="getCreditResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CreditServiceSoapBinding" type="tns:CreditService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="saveCredit">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="saveCredit">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="saveCreditResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCredits">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCredits">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCreditsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCustomerCredit">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCustomerCredit">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCustomerCreditResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCredit">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCredit">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCreditResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CreditService">
+    <wsdl:port binding="tns:CreditServiceSoapBinding" name="CreditManagerImplPort">
+      <soap:address location="http://localhost:7070/umax-sample-financialmockapp/services/CreditService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7070/umax-sample-financialmockapp/services/CreditService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="getCredit" bindingOperationName="getCredit" type="Request-Response" outputName="getCreditResponse" inputName="getCredit" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7070/umax-sample-financialmockapp/services/CreditService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.financialmockapp.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getCredit>
+         <!--Optional:-->
+         <creditId>-1</creditId>
+      </ser:getCredit>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.financialmockapp.sample.umax.threeti.com/CreditService/getCredit"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="getCredits" bindingOperationName="getCredits" type="Request-Response" outputName="getCreditsResponse" inputName="getCredits" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7070/umax-sample-financialmockapp/services/CreditService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.financialmockapp.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getCredits/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.financialmockapp.sample.umax.threeti.com/CreditService/getCredits"/></con:call></con:operation><con:operation isOneWay="false" action="" name="saveCredit" bindingOperationName="saveCredit" type="Request-Response" outputName="saveCreditResponse" inputName="saveCredit" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7070/umax-sample-financialmockapp/services/CreditService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.financialmockapp.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:saveCredit>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <creditLine>?</creditLine>
+            <!--Optional:-->
+            <customer>
+               <!--Optional:-->
+               <address>?</address>
+               <!--Optional:-->
+               <email>?</email>
+               <!--Optional:-->
+               <id>?</id>
+               <!--Optional:-->
+               <name>?</name>
+               <!--Optional:-->
+               <phoneNumber>?</phoneNumber>
+               <!--Optional:-->
+               <version>?</version>
+            </customer>
+            <!--Optional:-->
+            <debt>?</debt>
+            <!--Optional:-->
+            <id>?</id>
+            <!--Optional:-->
+            <version>?</version>
+         </arg0>
+      </ser:saveCredit>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.financialmockapp.sample.umax.threeti.com/CreditService/saveCredit"/></con:call></con:operation><con:operation isOneWay="false" action="" name="getCustomerCredit" bindingOperationName="getCustomerCredit" type="Request-Response" outputName="getCustomerCreditResponse" inputName="getCustomerCredit" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7070/umax-sample-financialmockapp/services/CreditService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.financialmockapp.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getCustomerCredit>
+         <!--Optional:-->
+         <customerId>-1</customerId>
+      </ser:getCustomerCredit>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.financialmockapp.sample.umax.threeti.com/CreditService/getCustomerCredit"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

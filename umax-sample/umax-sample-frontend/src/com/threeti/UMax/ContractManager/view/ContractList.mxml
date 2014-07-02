@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<util:AppView xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			  xmlns:s="library://ns.adobe.com/flex/spark" 
+			  xmlns:mx="library://ns.adobe.com/flex/mx"
+			  xmlns:util="com.threeti.UMax.main.util.*"
+			  xmlns:view="com.threeti.UMax.ContractManager.view.*"
+			  width="800" height="540" x="200" y="50"
+			  creationComplete="appViewHelper.requestList()">
+	
+	<fx:Style>
+		@namespace s "library://ns.adobe.com/flex/spark";
+		@namespace mx "library://ns.adobe.com/flex/mx";
+		@namespace util "com.threeti.UMax.main.util.*";
+		@namespace view "com.threeti.UMax.ContractManager.view.*";
+		
+		.df {
+			up-skin:Embed("assets/images/icons/datefield_button_up.png");
+			down-skin:Embed("assets/images/icons/datefield_button_up.png");
+			over-skin:Embed("assets/images/icons/datefield_button_up.png");
+			disabled-skin:Embed("assets/images/icons/datefield_button_disabled.png");
+		}
+	</fx:Style>
+	<fx:Declarations>
+		<view:ContractListHelper id="appViewHelper" view="{this}"/>
+		<mx:DateFormatter formatString="YYYY-DD-MM" id="dateFormatter"/>
+		<mx:CurrencyFormatter  useThousandsSeparator="true" decimalSeparatorFrom="."  id="currencyFormatter"/>
+	</fx:Declarations>
+
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.managers.PopUpManager;		
+			[Bindable]
+			public var currentContract:Object;
+			public  function  formmer(item:Object,column:DataGridColumn):String
+			{
+				return 	dateFormatter.format(item.date);
+			}
+			private function Format(item:Object,column:DataGridColumn):String
+			{
+			return currencyFormatter.format(item.price);
+				
+			}
+			private function Formats(item:Object,column:DataGridColumn):String
+			{
+				return currencyFormatter.format(item.amount);
+				
+			}
+			public function check():void
+			{
+			if(this.myGrid.selectedItem.state!="新建")
+			{
+			this.btntask.enabled=false;
+			
+			}else
+			{
+				this.btntask.enabled=true;
+				
+			}
+				
+			}
+			
+		/* 	public function myGrid_doubleClickHandler(event:MouseEvent):void
+			{
+				var remove:int=this.myGrid.selectedIndex;
+				
+				if(remove>=0)
+				{			
+					var conApp:ContractApprove=new ContractApprove();
+					conApp.ConList=this;
+					PopUpManager.addPopUp(conApp,this,true);
+					PopUpManager.centerPopUp(conApp);
+					currentContract=this.myGrid.selectedItem;
+				}
+			} */
+		]]>
+	</fx:Script>
+	<util:states>
+		<s:State name="main"/>
+		<s:State name="edit"/>
+	</util:states>
+	
+	<util:layout>
+		<s:VerticalLayout gap="0" clipAndEnableScrolling="true"/>
+	</util:layout>
+	
+	<s:Group width="100%">
+		<s:Rect left="0" right="0" top="0" bottom="0" top.main="0" left.main="0" bottom.main="-15.5" right.main="0">
+			<s:fill>
+				<s:SolidColor color="#edecec"/>
+			</s:fill>
+			<s:stroke>
+				<s:SolidColorStroke color="#d1d1d1" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+	<s:VGroup width="100%" height="130" gap="10" paddingTop="10" horizontalAlign="center" includeIn="main">
+
+		<s:HGroup>
+			<mx:FormItem label="客户名称:" labelWidth="100">
+				<s:TextInput width="220"/>
+			</mx:FormItem>
+			<mx:FormItem label="合同编号:" labelWidth="100">
+				<s:TextInput width="220"/>
+			</mx:FormItem>
+		</s:HGroup>
+		<s:HGroup>
+			<mx:FormItem label="甲方代表:" labelWidth="100">
+				<s:TextInput width="220"/>
+			</mx:FormItem>
+			
+			<mx:FormItem label="乙方代表:" labelWidth="100">
+				<s:TextInput width="220"/>
+			</mx:FormItem>
+		</s:HGroup>
+		<s:HGroup id="hg">
+			<mx:FormItem label="日期:" direction="horizontal" labelWidth="100" horizontalGap="0">
+				<mx:DateField width="100" styleName="df"/>
+				<s:Label text="至" width="20" height="100%" textAlign="center" verticalAlign="middle"/>
+				<mx:DateField width="100" styleName="df"/>
+			</mx:FormItem>
+			<mx:FormItem label="状态:" labelWidth="100">
+				<s:DropDownList width="220"/>
+			</mx:FormItem>
+		</s:HGroup>
+		
+		<s:HGroup horizontalAlign="right" width="{hg.width}">
+			<s:Button label="搜索" click="appViewHelper.requestList()" />
+		</s:HGroup>
+	</s:VGroup>
+	</s:Group>
+	<mx:Spacer height="20"/>
+	<s:Group width="100%" includeIn="main">
+		<s:layout>
+			<s:HorizontalLayout paddingLeft="20" paddingTop="5" paddingBottom="5" />
+		</s:layout>
+		<s:Button label="新建" />
+		<s:Button label="编辑"  />
+		<s:Button label="送审"   
+				  click="appViewHelper.examineContractHandler(myGrid.selectedItem)" id="btntask"/>
+		<s:Button label="作废"  />
+		<s:Button label="打印"  />
+		<s:Button label="导出"  />
+	</s:Group>
+	
+	<s:Group width="100%" height="100%" includeIn="main">
+			<s:Rect left="0" right="0" top="0" bottom="0">
+				<s:fill>
+					<s:SolidColor color="#edecec"/>
+				</s:fill>
+				<s:stroke>
+					<s:SolidColorStroke color="#d1d1d1" weight="1"/>
+				</s:stroke>
+			</s:Rect>
+		
+		<mx:DataGrid id="myGrid" left="10" right="10" top="10" bottom="10" doubleClickEnabled="true" 
+					 doubleClick="appViewHelper.myGrid_doubleClickHandler(event)" headerStyleName="list_head" change="check()">
+			<mx:columns>
+				<mx:DataGridColumn headerText="序号" labelFunction="appViewHelper.getSerialNo" width="40"/>
+				<mx:DataGridColumn headerText="合同编号" dataField="id" />
+				<mx:DataGridColumn headerText="甲方代表" dataField="firstParty.name" />
+				<mx:DataGridColumn headerText="乙方代表" dataField="secondParty" />
+				<mx:DataGridColumn headerText="产品名称" dataField="productName" />
+				<mx:DataGridColumn headerText="产品单价(元)" dataField="price"  labelFunction="Format"/>
+				<mx:DataGridColumn headerText="产品数量(个)" dataField="quantity" />
+				<mx:DataGridColumn headerText="总金额" dataField="amount"  labelFunction="Formats"  />
+				<mx:DataGridColumn headerText="签订日期"  dataField="date" width="120" labelFunction="formmer"/>
+				<mx:DataGridColumn headerText="状态" width="100"  dataField="state" />
+			</mx:columns>
+		</mx:DataGrid>
+	</s:Group>
+	
+	<view:ContractApprove includeIn="edit" back="appViewHelper.contractapprove1_backHandler(event)" appViewHelper="{appViewHelper}"/>
+</util:AppView>

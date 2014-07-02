@@ -1,0 +1,13 @@
+背景：
+umax-sample整合了两个孤立的业务系统：销售系统和财务系统。整合后，用户将通过统一的个人门户订阅与使用与个人相关的应用，从而获得全新的用户体验，同时整合后，原有业务流程都得到了重组与优化。
+演示步骤：
+1. 双击start-all.bar,启动所有服务（大约需是2-3分钟）
+2. 打开IE，新建3个tab页,（IE主页已设定为uamx sample主页：http://localhost/Main.html），分别以：
+   账号:salesman 密码：user
+   账号:salesmanager 密码：user
+   账号:salesdirector 密码：user
+   在3个tab页上登录
+3. 系统初始的工作流程是：salesman送审合同 -> salesmanager进行审查 -> salesdirector进行复审，全部批准后，合同状态变为"审核通过"。这个流程代表“应用UMAX之前孤立系统内的简单业务流程”。
+4. 双击swich-workflow.bat，进行业务流程重组与优化。（大约需要1-2分钟）
+5. 此时系统工作流程将优化为：salesman送审合同 -> UMAX平台针对合同涉及的客户进行"信用评估" -> 若不存在信用风险直接送由salesmanager进行审查，否则由salesdirector进行定夺。该流程需要同时与销售系统和财务系统进行交互，跨越系统间的信息孤岛，这个流程代表“应用UMAX之后跨系统的高级业务流程”。
+   

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="996" height="266"
+		 creationComplete="loginViewHelper.init()" xmlns:view="com.threeti.UMax.main.view.*">
+	<fx:Declarations>
+		<view:LoginViewHelper id="loginViewHelper"/>
+		<mx:Validator id="nameValidator" required="true" 
+					  source="{txtUserName}" property="text" requiredFieldError="请输入用户名"/>
+		<mx:Validator id="pwdValidator" required="true" 
+					  source="{txtPwd}" property="text" requiredFieldError="请输入密码"/>
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			
+		]]>
+	</fx:Script>
+	
+	<s:Rect width="100%" height="100%">
+		<s:fill>
+			<s:BitmapFill source="@Embed('assets/images/LoginBg.png')"/>
+		</s:fill>
+	</s:Rect>
+	
+	<mx:Image source="@Embed('assets/images/LoginLogo.png')" x="40" y="33"/>
+	
+	<s:Group x="653" y="90">
+		<s:Label text="用户名"  x="0" y="5" color="white"/>
+		<s:TextInput id="txtUserName"  x="57" y="0"/>
+		<s:Label text="密  码"  x="0" y="39" color="white"/>
+		<s:TextInput id="txtPwd" displayAsPassword="true" x="57" y="34"/>
+		<s:Button label="登     陆" width="100" x="72" y="85" click="loginViewHelper.login()" skinClass="com.threeti.UMax.main.skin.LoginButtonSkin"/>
+		<s:Label id="lblError" text="" color="red" x="0" y="126"/>
+	</s:Group>
+	
+	
+</s:Group>

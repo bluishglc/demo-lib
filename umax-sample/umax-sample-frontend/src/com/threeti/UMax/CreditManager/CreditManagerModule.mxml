@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<util:BaseModule xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark" 
+		   xmlns:mx="library://ns.adobe.com/flex/mx" layout="absolute" xmlns:view="com.threeti.UMax.CreditManager.view.*"
+		   xmlns:util="com.threeti.UMax.main.util.*">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			
+			
+		]]>
+	</fx:Script>
+	
+	<view:CreditList id="creditList" 
+					 myMax="redispatchEvent(event)"
+					 myMin="redispatchEvent(event)"
+					 myRestore="redispatchEvent(event)"
+					 myClose="redispatchEvent(event)"
+					  />
+</util:BaseModule>

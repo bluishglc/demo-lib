@@ -1,0 +1,6 @@
+|-umax-sample-integration (将各服务集成于服务总线的应用，zip包，部署于mule容器， port:9090) 
+|-umax-sample-compisite(提供复合服务，war包， port:5050)
+|-umax-sample-financiamocklapp(仿制的财务系统 ，war包， port:7070)
+|-umax-sample-salesmockapp (仿制的销售系统 ，war包， port:6060)
+|-umax-sample-workflow (提供对工作流引擎的集成以及基本的工作流服务，war包， port:4040)
+|-umax-sample-security (提供面向CAS的安全数据存储与读取，war包 port:3030)

@@ -1,0 +1,79 @@
+Currensee Programming Quiz
+
+
+
+
+Using threads, write a program which will read alternating lines from a file,
+and print them to the console (stdout), with identification of which 
+thread read the data from the file.  The indicator should be the name of the 
+thread which is doing the read/print of the line from the file.
+
+One thread should read and print only the odd lines of the file, and the other
+thread should read and print only the even lines of the file.  The file should
+be opened and read only once - with reads alternating between the threads
+responsible for reading and printing even and odd lines.
+
+The program's main thread must terminate on it's own without any need to break
+or kill the main process.
+
+
+The example output from this program should look like:
+
+Started.
+Odd: 1
+Even: 2
+Odd: 3
+Even: 4
+Odd: 5
+Even: 6
+Odd: 7
+Even: 8
+Odd: 9
+Even: a
+Odd: b
+Even: c
+Odd: d
+Even: e
+Odd: f
+Finished.
+
+
+The application should contain a public static void main() method
+so that we can compile and run it against the inputfile.txt easily.
+You may deliever the solution as either a single .java file, or
+if your solution involves more than one class, it must be delievered
+as a runnable .jar.  If you submit a runnable .jar file, please
+also submit the source file(s).  You can hard-code the path to the 
+inputfile.txt, or allow it to be supplied as an argument to the main()
+method.
+
+You may use whichever Java programming environment  or IDE you are most familiar 
+with.  However, the supplied solution must not have any dependencies beyond
+those included with the JRE.  You may use all core JDK libraries up to and 
+including JDK SE 6 (e.g. 1.6).
+
+
+
+
+HINT:  The program must use two or more threads.  
+
+
+
+
+-------------------------------------------------------------------------------
+This file and any files transmitted with it are confidential and intended
+solely for the addressee.  If you received this email in error, please do 
+not disclose the contents to anyone; kindly notify the sender by return email 
+and delete this email and any attachments from your system.
+
+©2012 Currensee Inc.
+is registered with the Commodity Futures Trading Commission “CFTC”as an Introducing 
+Broker (“IB”) and is a member of the National Futures Association (NFA) Member ID 0403251 | 
+Please note that overthe counter retail foreign currency (Forex) trading may involve
+significant risk of loss. It is not suitable for all investors and you should make sure 
+you understand the risks involved before trading, and seek independent advice if necessary. 
+Any opinions, news, research, analyses, performance strategies, prices, charts or other 
+information are not necessarily predictive of any particular result and do not constitute 
+investment advice. Past performance isno indication of future results.
+
+Currensee Inc | 54 Canal Street, 4th Floor, Boston, MA 02114 | +1.617.624.3824

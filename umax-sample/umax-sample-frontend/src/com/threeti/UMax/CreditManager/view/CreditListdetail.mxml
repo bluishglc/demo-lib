@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 width="312" height="172" 
+		 xmlns:view="com.threeti.UMax.CreditManager.view.*"  >
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<fx:Declarations>
+		<view:CreditListHelper id="creditListHelper"/>
+		<mx:CurrencyFormatter id="currencyFormatter" useThousandsSeparator="true" decimalSeparatorFrom="."/>
+	</fx:Declarations>
+	<fx:Metadata>
+		[Event(name="back", type="flash.events.Event")]
+	</fx:Metadata>
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			public static const EVENT_BACK:String = "back";
+			[Bindable]
+			public var creditDet:CreditList;
+			
+			protected function button_click(event:MouseEvent):void
+			{
+				
+				this.dispatchEvent(new Event(EVENT_BACK)); 
+				/* PopUpManager.removePopUp(this); */
+			}
+		
+		]]>
+	</fx:Script>
+	
+	
+	<s:Group width="100%">
+		<s:Rect left="0" right="0" top="0" bottom="0">
+			<s:fill>
+				<s:SolidColor color="#edecec"/>
+			</s:fill>
+			<s:stroke>
+				<s:SolidColorStroke color="#d1d1d1" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+		
+		<mx:Form width="50%" 
+				 paddingLeft="10" 
+				 paddingRight="10" 
+				 paddingTop="10" 
+				 paddingBottom="10" 
+				 left="0" 
+				 top="0" 
+				 bottom="0" 
+				 color="#0b0282">
+			<mx:FormItem label="合同编号:">
+				<s:Label color="#000000" text="{creditListHelper.current.customer.name}"/>
+			</mx:FormItem>
+			<mx:FormItem label="信用度:">
+				<s:Label color="#000000" text="{creditListHelper.current.creditLine}"/>
+			</mx:FormItem>
+			<mx:FormItem label="欠款金额:">
+				<s:Label color="#000000" text="{currencyFormatter.format(creditListHelper.current.debt)}"/>
+			</mx:FormItem>
+		</mx:Form>
+	</s:Group>
+	<s:HGroup width="100%" horizontalAlign="center" bottom="5" >
+		<s:Button  label="返回" click="button_click(event)"    x="119" y="123"/>
+	</s:HGroup>
+</s:Group>

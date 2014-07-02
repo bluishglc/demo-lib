@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:aop="http://www.springframework.org/schema/aop" 
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            			   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+            			   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+            			   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+       default-lazy-init="true">
+    
+	<bean id="orderPartition" class="net.sf.sharding.model.MultiShardPartition">
+		<property name="id" value="orderPartition"/>
+		<property name="shardGroups">
+			<list>
+				<ref bean="orderShardGroup0"/>
+				<ref bean="orderShardGroup1"/>
+			</list>
+		</property>		
+	</bean>
+	
+	<bean id="orderShardGroup0" class="net.sf.sharding.model.ShardGroup">
+		<property name="id" value="orderShardGroup0"/>
+		<property name="startId" value="${shardgroup.order0.startId}"/>
+		<property name="endId" value="${shardgroup.order0.endId}"/>
+		<property name="mod" value="${shardgroup.order0.mod}"/>
+		<property name="shards">
+			<list>
+				<ref bean="orderShard0"/>
+				<ref bean="orderShard1"/>
+			</list>
+		</property>		
+	</bean>
+	
+	<bean id="orderShardGroup1" class="net.sf.sharding.model.ShardGroup">
+		<property name="id" value="orderShardGroup1"/>
+		<property name="startId" value="10"/>
+		<property name="endId" value="21"/>
+		<property name="mod" value="6"/>
+		<property name="shards">
+			<list>
+				<ref bean="orderShard2"/>
+				<ref bean="orderShard3"/>
+				<ref bean="orderShard4"/>
+			</list>
+		</property>		
+	</bean>
+	
+	<!-- ==================    Order Shard 0     ================== -->
+	
+    <bean id="orderShard0" class="net.sf.sharding.model.GroupShard">
+    	<property name="id" value="orderShard0"/>
+    	<property name="resource" ref="orderJdbcTemplate0"/>
+    	<property name="hashValues">
+    		<list>
+				<value>${shard.order0.hashValue0}</value>
+			</list>
+    	</property>
+    </bean>
+    	
+	<bean id="orderDataSource0" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${shard.order0.driver}" />
+		<property name="url" value="${shard.order0.url}" />
+		<property name="username" value="${shard.order0.username}"/>
+        <property name="password" value="${shard.order0.password}"/>
+	</bean>
+	
+	<bean id="orderJdbcTemplate0" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="orderDataSource0"/>
+	</bean>
+    
+    <!-- ==================    Order Shard 1     ================== -->
+    
+    <bean id="orderShard1" class="net.sf.sharding.model.GroupShard">
+    	<property name="id" value="orderShard1"/>
+    	<property name="resource" ref="orderJdbcTemplate1"/>
+    	<property name="hashValues">
+    		<list>
+				<value>${shard.order1.hashValue0}</value>
+			</list>
+    	</property>
+    </bean>
+    
+   	<bean id="orderDataSource1" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${shard.order1.driver}" />
+		<property name="url" value="${shard.order1.url}" />
+		<property name="username" value="${shard.order1.username}"/>
+        <property name="password" value="${shard.order1.password}"/>
+	</bean>
+	
+	<bean id="orderJdbcTemplate1" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="orderDataSource1"/>
+	</bean>
+	    
+    <!-- ==================    Order Shard 2     ================== -->
+    
+    <bean id="orderShard2" class="net.sf.sharding.model.GroupShard">
+    	<property name="id" value="orderShard2"/>
+    	<property name="resource" ref="orderJdbcTemplate2"/>
+    	<property name="hashValues">
+    		<list>
+				<value>${shard.order2.hashValue0}</value>
+			</list>
+    	</property>
+    </bean>
+    
+   	<bean id="orderDataSource2" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${shard.order2.driver}" />
+		<property name="url" value="${shard.order2.url}" />
+		<property name="username" value="${shard.order2.username}"/>
+        <property name="password" value="${shard.order2.password}"/>
+	</bean>	
+	
+	<bean id="orderJdbcTemplate2" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="orderDataSource2"/>
+	</bean>
+	    
+    <!-- ==================    Order Shard 3     ================== -->
+    
+    <bean id="orderShard3" class="net.sf.sharding.model.GroupShard">
+    	<property name="id" value="orderShard3"/>
+    	<property name="resource" ref="orderJdbcTemplate3"/>
+    	<property name="hashValues">
+    		<list>
+				<value>${shard.order3.hashValue0}</value>
+				<value>${shard.order3.hashValue1}</value>
+			</list>
+    	</property>
+    </bean>
+    
+   	<bean id="orderDataSource3" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${shard.order3.driver}" />
+		<property name="url" value="${shard.order3.url}" />
+		<property name="username" value="${shard.order3.username}"/>
+        <property name="password" value="${shard.order3.password}"/>
+	</bean>	
+	
+	<bean id="orderJdbcTemplate3" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="orderDataSource3"/>
+	</bean>
+	
+    <!-- ==================    Order Shard 4     ================== -->
+    
+    <bean id="orderShard4" class="net.sf.sharding.model.GroupShard">
+    	<property name="id" value="orderShard4"/>
+    	<property name="resource" ref="orderJdbcTemplate4"/>
+    	<property name="hashValues">
+    		<list>
+				<value>${shard.order4.hashValue0}</value>
+				<value>${shard.order4.hashValue1}</value>
+				<value>${shard.order4.hashValue2}</value>
+			</list>
+    	</property>
+    </bean>
+    
+   	<bean id="orderDataSource4" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${shard.order4.driver}" />
+		<property name="url" value="${shard.order4.url}" />
+		<property name="username" value="${shard.order4.username}"/>
+        <property name="password" value="${shard.order4.password}"/>
+	</bean>
+	
+	<bean id="orderJdbcTemplate4" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="orderDataSource4"/>
+	</bean>
+ 
+</beans>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="true">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.threeti.UMax.task.business.TaskDelegate;
+			import com.threeti.UMax.utils.DateUtil;
+			
+			import mx.core.FlexGlobals;
+			import mx.managers.PopUpManager;
+			import mx.rpc.events.ResultEvent;
+			
+			private var taskDetail:TaskDetailView;
+			
+			private function label1_clickHandler(task:Object):void
+			{
+				taskDetail = new TaskDetailView();
+				PopUpManager.addPopUp(taskDetail, parent);
+				taskDetail.x = FlexGlobals.topLevelApplication.width / 2 - taskDetail.width / 2;
+				taskDetail.y = FlexGlobals.topLevelApplication.height / 2 - taskDetail.height / 2;
+				taskDetail.addEventListener("myClose", function(event:Event):void {
+					PopUpManager.removePopUp(taskDetail);
+				});
+				
+				initTaskDetail(task.id);
+				taskDetail.currentTask = task
+			}
+			
+			private function initTaskDetail(taskID:String):void {
+				var delegate:TaskDelegate = new TaskDelegate(initTaskDetailHandler);
+				delegate.getContractVariable(taskID);
+			}
+			
+			private function initTaskDetailHandler(event:ResultEvent):void {
+				taskDetail.currentContract = event.result;
+			}
+			
+		]]>
+	</fx:Script>
+	<s:Group width="100%"
+			 height="100%">
+		<!--<s:Rect left="0"
+				right="0"
+				top="1"
+				bottom="1"
+				radiusX="10">
+			<s:stroke>
+				<s:SolidColorStroke color="0x0901ac" weight="1"/>
+			</s:stroke>
+		</s:Rect>-->
+		<mx:Image left="15" 
+				  source="@Embed('assets/images/review_contract_flag.png')"
+				  height="18" verticalCenter="0"/>
+		<s:Label text="{data.name}"
+				 left="40"
+				 height="100%"
+				 verticalAlign="middle" 
+				 buttonMode="true" 
+				 click="label1_clickHandler(data)" 
+				 color="#0e19f5"/>
+		<s:Label text="{data.username}"
+				 right="100"
+				 height="100%"
+				 verticalAlign="middle"/>
+		<s:Label text="{DateUtil.format(data.createTime)}"
+				 right="15"
+				 height="100%"
+				 verticalAlign="middle"/>
+	</s:Group>
+	
+</s:ItemRenderer>

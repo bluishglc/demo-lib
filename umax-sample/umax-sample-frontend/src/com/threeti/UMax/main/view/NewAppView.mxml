@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 width="650" gap="0">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			
+			private function close():void
+			{
+				this.visible = false;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:Group width="100%" height="31">
+		<s:Rect width="100%" height="100%">
+			<s:fill>
+				<s:BitmapFill source="@Embed('assets/images/NewAppTitleBg.png')"/>
+			</s:fill>
+		</s:Rect>
+		<s:Label text="添加应用" fontWeight="bold" x="50" y="10"/>
+		<mx:Image source="@Embed('assets/images/NewAppClosebtn.png')" top="5" right="10" click="close()"/>
+	</s:Group>
+	
+	<s:Group width="100%" height="450">
+		<s:Rect width="100%" height="100%">
+			<s:fill>
+				<s:SolidColor color="#FFFFFF" />
+			</s:fill>
+		</s:Rect>
+		<s:HGroup gap="10" x="40" y="10">
+			<s:Label text="筛选:"/>
+			<s:Label text="全部" width="60" textAlign="center" backgroundColor="#ff9900"/>
+			<s:Label text="|"/>
+			<s:Label text="工具类" width="60" textAlign="center"/>
+			<s:Label text="|"/>
+			<s:Label text="办公类" width="60" textAlign="center"/>
+			<s:Label text="|"/>
+			<s:Label text="咨询类" width="60" textAlign="center"/>
+		</s:HGroup>
+		<s:VGroup x="80" y="50" gap="10">
+			<s:HGroup gap="40">
+				<s:VGroup horizontalAlign="center">
+					<mx:Image source="@Embed('assets/images/NewAppIcon4.png')"/>
+					<s:Label text="发送邮件"/>
+				</s:VGroup>
+				<s:VGroup horizontalAlign="center">
+					<mx:Image source="@Embed('assets/images/NewAppIcon1.png')"/>
+					<s:Label text="起草工作联系单"/>
+				</s:VGroup>
+				<s:VGroup horizontalAlign="center">
+					<mx:Image source="@Embed('assets/images/NewAppIcon2.png')"/>
+					<s:Label text="参加培训"/>
+				</s:VGroup>
+				<s:VGroup horizontalAlign="center">
+					<mx:Image source="@Embed('assets/images/NewAppIcon3.png')"/>
+					<s:Label text="管理项目"/>
+				</s:VGroup>
+			</s:HGroup>
+			<mx:HRule width="100%" strokeColor="0xbcbec0" strokeWidth="2"/>
+			<s:HGroup gap="40">
+				<s:VGroup horizontalAlign="center">
+					<mx:Image source="@Embed('assets/images/NewAppIcon5.png')"/>
+					<s:Label text="报表报告"/>
+				</s:VGroup>
+				<s:VGroup horizontalAlign="center">
+					<mx:Image source="@Embed('assets/images/NewAppIcon6.png')"/>
+					<s:Label text="业内新闻"/>
+				</s:VGroup>
+				<s:VGroup horizontalAlign="center">
+					<mx:Image source="@Embed('assets/images/NewAppIcon7.png')"/>
+					<s:Label text="社会热点"/>
+				</s:VGroup>
+				<s:VGroup horizontalAlign="center">
+					<mx:Image source="@Embed('assets/images/NewAppIcon8.png')"/>
+					<s:Label text="申领物品"/>
+				</s:VGroup>
+			</s:HGroup>
+			<mx:HRule width="100%" strokeColor="0xbcbec0" strokeWidth="2"/>
+			<s:HGroup gap="40">
+				<s:VGroup horizontalAlign="center">
+					<mx:Image source="@Embed('assets/images/NewAppIcon9.png')"/>
+					<s:Label text="审核合同"/>
+				</s:VGroup>
+				<s:VGroup horizontalAlign="center">
+					<mx:Image source="@Embed('assets/images/NewAppIcon10.png')"/>
+					<s:Label text="Wiki"/>
+				</s:VGroup>
+				<s:VGroup horizontalAlign="center">
+					<mx:Image source="@Embed('assets/images/NewAppIcon1.png')"/>
+					<s:Label text="内网"/>
+				</s:VGroup>
+				<s:VGroup horizontalAlign="center">
+					<mx:Image source="@Embed('assets/images/NewAppIcon2.png')"/>
+					<s:Label text="培训系统"/>
+				</s:VGroup>
+			</s:HGroup>
+		</s:VGroup>
+		
+		
+	</s:Group>
+	
+</s:VGroup>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="100%"
+			   height="100%"
+			   skinClass="com.threeti.UMax.task.skin.TaskTitleWindowSkin"
+			   title="{'待办任务列表（'+ model.taskList.length +'）'}" 
+			   creationComplete="titlewindow1_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.threeti.UMax.main.model.MainModelLocator;
+			import com.threeti.UMax.task.business.TaskDelegate;
+			import com.threeti.UMax.task.model.TaskModel;
+			import com.threeti.UMax.task.skin.TaskListSkin;
+			import com.threeti.UMax.task.skin.TaskTitleWindowSkin;
+			
+			import mx.collections.ArrayCollection;
+			import mx.collections.Sort;
+			import mx.collections.SortField;
+			import mx.events.FlexEvent;
+			import mx.rpc.events.ResultEvent;
+			
+			import spark.events.RendererExistenceEvent;
+
+			[Bindable]
+			private var model:TaskModel = TaskModel.getInstance();
+			
+			protected function list1_rendererAddHandler(event:RendererExistenceEvent):void
+			{
+				event.renderer.height=listTask.height / 4;
+			}
+
+			private var timer:Timer = new Timer(5000);
+			
+			protected function titlewindow1_creationCompleteHandler(event:FlexEvent):void
+			{
+				timer.addEventListener(TimerEvent.TIMER, timerHandler);
+				timer.start();
+			}
+			
+			private function timerHandler(event:TimerEvent):void {
+				getTasks();
+			}
+			
+			private function getTasks():void {
+				var delegate:TaskDelegate = new TaskDelegate(getTasksResultHandler);
+				var loginUser:Object = MainModelLocator.getInstance().userVO;
+				var roleNames:ArrayCollection = new ArrayCollection();
+				for each(var o:Object in loginUser.roles) {
+					roleNames.addItem(o.name);
+				}
+				delegate.getTasks(loginUser.username, roleNames);
+			}
+			
+			private function getTasksResultHandler(event:ResultEvent):void {
+				if(event.result) {
+					if(event.result is ArrayCollection) {
+						TaskModel.getInstance().taskList = event.result as ArrayCollection;
+						var sort:Sort = new Sort();
+						sort.fields = [new SortField("createTime", true, true)];
+						TaskModel.getInstance().taskList.sort = sort;
+					} else {
+						TaskModel.getInstance().taskList.removeAll();
+						TaskModel.getInstance().taskList.addItem(event.result);
+					}
+				}else {
+					TaskModel.getInstance().taskList.removeAll();
+				}
+			}
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+		<s:ArrayList id="listData">
+			<fx:Object contractName="复审合同"
+					   username="张欣然"
+					   date="2011-8-22"/>
+			<fx:Object contractName="复审合同"
+					   username="张欣然"
+					   date="2011-8-22"/>
+			<fx:Object contractName="复审合同"
+					   username="张欣然"
+					   date="2011-8-22"/>
+			<fx:Object contractName="复审合同"
+					   username="张欣然"
+					   date="2011-8-22"/>
+			<fx:Object contractName="复审合同"
+					   username="张欣然"
+					   date="2011-8-22"/>
+		</s:ArrayList>
+	</fx:Declarations>
+	<s:List id="listTask"
+			left="1"
+			right="1"
+			top="0"
+			bottom="0"
+			dataProvider="{TaskModel.getInstance().taskList}"
+			rendererAdd="list1_rendererAddHandler(event)" 
+			skinClass="com.threeti.UMax.task.skin.TaskListSkin" 
+			itemRenderer="com.threeti.UMax.task.view.TaskListItemRenderer"/>
+	<s:controlBarContent>
+		<mx:Image source="@Embed('assets/images/TaskLA.png')"/>
+		<s:Label text="10/20"
+				 textAlign="center"
+				 height="100%"
+				 verticalAlign="middle" color="0xFFFFFF"/>
+		<mx:Image source="@Embed('assets/images/TaskRA.png')"/>
+	</s:controlBarContent>
+</s:TitleWindow>

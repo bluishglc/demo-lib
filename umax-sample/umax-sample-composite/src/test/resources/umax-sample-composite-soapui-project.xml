@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="umax-sample-composite" resourceRoot="" soapui-version="4.0.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="FinancialRiskEvaluationServiceSoapBinding" type="wsdl" bindingName="{http://service.composite.sample.umax.threeti.com/}FinancialRiskEvaluationServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:5050/umax-sample-composite/services/FinancialRiskEvaluationService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:5050/umax-sample-composite/services/FinancialRiskEvaluationService?wsdl"><con:part><con:url>http://localhost:5050/umax-sample-composite/services/FinancialRiskEvaluationService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="FinancialRiskEvaluationService" targetNamespace="http://service.composite.sample.umax.threeti.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.composite.sample.umax.threeti.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://service.salesmockapp.sample.umax.threeti.com/" version="1.0" xmlns:tns="http://service.salesmockapp.sample.umax.threeti.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="contract" type="tns:contract"/>
+      <xs:element name="customer" type="tns:customer"/>
+      <xs:element name="getContract" type="tns:getContract"/>
+      <xs:element name="getContractResponse" type="tns:getContractResponse"/>
+      <xs:element name="getContracts" type="tns:getContracts"/>
+      <xs:element name="getContractsResponse" type="tns:getContractsResponse"/>
+      <xs:element name="saveContract" type="tns:saveContract"/>
+      <xs:element name="saveContractResponse" type="tns:saveContractResponse"/>
+      <xs:complexType name="contract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" type="xs:double"/>
+          <xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="firstParty" type="tns:customer"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="price" type="xs:double"/>
+          <xs:element minOccurs="0" name="productName" type="xs:string"/>
+          <xs:element minOccurs="0" name="quantity" type="xs:int"/>
+          <xs:element minOccurs="0" name="secondParty" type="xs:string"/>
+          <xs:element minOccurs="0" name="version" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="customer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="address" type="xs:string"/>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="phoneNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="version" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="saveContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="tns:contract"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="saveContractResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:contract"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getContractsResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:contract"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getContractResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:contract"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getContracts">
+        <xs:sequence/>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://service.financialmockapp.sample.umax.threeti.com/" version="1.0" xmlns:tns="http://service.financialmockapp.sample.umax.threeti.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="credit" type="tns:credit"/>
+      <xs:element name="customer" type="tns:customer"/>
+      <xs:element name="getCredit" type="tns:getCredit"/>
+      <xs:element name="getCreditResponse" type="tns:getCreditResponse"/>
+      <xs:element name="getCredits" type="tns:getCredits"/>
+      <xs:element name="getCreditsResponse" type="tns:getCreditsResponse"/>
+      <xs:element name="saveCredit" type="tns:saveCredit"/>
+      <xs:element name="saveCreditResponse" type="tns:saveCreditResponse"/>
+      <xs:complexType name="credit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="creditLine" type="xs:double"/>
+          <xs:element minOccurs="0" name="customer" type="tns:customer"/>
+          <xs:element minOccurs="0" name="debt" type="xs:double"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="version" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="customer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="address" type="xs:string"/>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="phoneNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="version" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getCredit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="creditId" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getCreditResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="credit" type="tns:credit"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="saveCredit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="tns:credit"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getCredits">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="getCreditsResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:credit"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="saveCreditResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:credit"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://service.composite.sample.umax.threeti.com/" version="1.0" xmlns:ns1="http://service.salesmockapp.sample.umax.threeti.com/" xmlns:ns2="http://service.financialmockapp.sample.umax.threeti.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://service.salesmockapp.sample.umax.threeti.com/"/>
+      <xs:import namespace="http://service.financialmockapp.sample.umax.threeti.com/"/>
+      <xs:element name="existCreditRisk" type="tns:existCreditRisk"/>
+      <xs:element name="existCreditRiskResponse" type="tns:existCreditRiskResponse"/>
+      <xs:complexType name="existCreditRisk">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="ns1:contract"/>
+          <xs:element minOccurs="0" name="arg1" type="ns2:credit"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="existCreditRiskResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="existCreditRiskResponse">
+    <wsdl:part element="tns:existCreditRiskResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="existCreditRisk">
+    <wsdl:part element="tns:existCreditRisk" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="FinancialRiskEvaluationService">
+    <wsdl:operation name="existCreditRisk">
+      <wsdl:input message="tns:existCreditRisk" name="existCreditRisk"></wsdl:input>
+      <wsdl:output message="tns:existCreditRiskResponse" name="existCreditRiskResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FinancialRiskEvaluationServiceSoapBinding" type="tns:FinancialRiskEvaluationService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="existCreditRisk">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="existCreditRisk">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="existCreditRiskResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FinancialRiskEvaluationService">
+    <wsdl:port binding="tns:FinancialRiskEvaluationServiceSoapBinding" name="FinancialRiskEvaluationManagerImplPort">
+      <soap:address location="http://localhost:5050/umax-sample-composite/services/FinancialRiskEvaluationService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:5050/umax-sample-composite/services/FinancialRiskEvaluationService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="existCreditRisk" bindingOperationName="existCreditRisk" type="Request-Response" outputName="existCreditRiskResponse" inputName="existCreditRisk" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:5050/umax-sample-composite/services/FinancialRiskEvaluationService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.composite.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:existCreditRisk>
+         <!--Optional:-->
+         <arg0>
+            <amount>10000.0</amount>
+
+            <date>2011-01-01T00:00:00+08:00</date>
+
+            <firstParty>
+
+               <address>北京市海淀区中关村大街1800号</address>
+
+               <email>purchase@oracle.com</email>
+
+               <id>-1</id>
+
+               <name>oracle</name>
+
+               <phoneNumber>086-010-2313111</phoneNumber>
+
+               <version>1</version>
+
+            </firstParty>
+
+            <id>-1</id>
+
+            <price>2000.0</price>
+
+            <productName>ecargo</productName>
+
+            <quantity>5</quantity>
+
+            <secondParty>3ti</secondParty>
+
+            <version>1</version>
+
+         </arg0>
+         <!--Optional:-->
+         <arg1>
+                       <creditLine>20000.0</creditLine>
+
+            <customer>
+
+               <address>北京市海淀区中关村大街1800号</address>
+
+               <email>purchase@oracle.com</email>
+
+               <id>-1</id>
+
+               <name>oracle</name>
+
+               <phoneNumber>086-010-2313111</phoneNumber>
+
+               <version>1</version>
+
+            </customer>
+
+            <debt>10000.0</debt>
+
+            <id>-1</id>
+
+            <version>1</version>
+
+         </arg1>
+      </ser:existCreditRisk>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.composite.sample.umax.threeti.com/FinancialRiskEvaluationService/existCreditRisk"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

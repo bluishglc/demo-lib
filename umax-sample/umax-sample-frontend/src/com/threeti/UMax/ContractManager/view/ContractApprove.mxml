@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 creationComplete="group1_creationCompleteHandler(event)" 
+		 xmlns:view="com.threeti.UMax.ContractManager.view.*" 
+		 height="246" width="506" >
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<view:ContractListHelper id="appViewHelper"/>
+		<mx:DateFormatter id="dateFormatter" formatString="YYYY-MM-DD"/>
+		<mx:CurrencyFormatter id="currencyFormatter" useThousandsSeparator="true" decimalSeparatorFrom="."/>
+	</fx:Declarations>
+	
+	<fx:Metadata>
+		[Event(name="back", type="flash.events.Event")]
+	</fx:Metadata>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.threeti.UMax.ContractManager.vo.Contract;
+			
+			import mx.controls.Alert;
+			import mx.controls.dataGridClasses.DataGridColumn;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			
+//			public var conwindow:ContractApproveList;
+			
+			public var items:Object;
+			public static const EVENT_BACK:String = "back";
+			[Bindable]
+			public var ConList:ContractList;
+			
+			[Bindable]
+			private var _contract:Contract
+
+			public function get contract():Contract
+			{
+				return _contract;
+			}
+
+			public function set contract(value:Contract):void
+			{
+				_contract = value;
+			/* 	
+				var value:Contract=
+				
+				customerLb.text = value.customer;
+				//numberLb.text = value.number;
+				sellerLb.text = value.seller;
+				buyerLb.text = value.buyer;
+				dateOfSigningLb.text = value.dateOfSigning.toDateString();
+				stateLb.text = value.state;
+				productLb.text = value.product;
+				productUnitPriceLb.text = value.productUnitPrice.toString();
+				productQuantityLb.text = value.productQuantity.toString();
+				totalValueLb.text = value.totalValue.toString(); */
+			}
+
+			protected function backHandler(event:MouseEvent):void
+			{
+
+				this.dispatchEvent(new Event(EVENT_BACK)); 
+			}
+			
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				
+//				var item:ContractApproveList=new ContractApproveList();
+//				items=item.contractDG.selectedItem;
+//				
+//				Alert.show(""+_contract.firstParty);
+//				
+//				sellerLb.text=items.firstParty;
+			}
+			public function fommert(item:Object,column:DataGridColumn):String{
+
+			 return 	dateFormatter.format(item.dateOfSigningLb);
+			}
+			
+		
+			
+		]]>
+	</fx:Script>
+	<!--
+	<s:layout>
+		<s:VerticalLayout paddingLeft="20" paddingRight="20" paddingTop="10" paddingBottom="10" />
+	</s:layout>-->
+	
+	
+	
+	<s:Label text="合同信息" />
+	
+	<s:Group width="100%">
+		<s:Rect left="0" right="0" top="0" bottom="0">
+			<s:fill>
+				<s:SolidColor color="#edecec"/>
+			</s:fill>
+			<s:stroke>
+				<s:SolidColorStroke color="#d1d1d1" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+
+		
+		<mx:Form width="50%" 
+				 paddingLeft="10" 
+				 paddingRight="10" 
+				 paddingTop="10" 
+				 paddingBottom="10" 
+				 left="0" 
+				 top="0" 
+				 bottom="0" 
+				 color="#0b0282">
+			<mx:FormItem label="甲方代表:" >
+				<s:Label color="#000000" text="{appViewHelper.currentContract.firstParty.name}"/>
+			</mx:FormItem>
+			
+			<mx:FormItem label="签订日期:" >
+				<s:Label color="#000000" text="{dateFormatter.format(appViewHelper.currentContract.date)}"/>
+			</mx:FormItem>
+			<mx:FormItem label="产品名称:" >
+				<s:Label color="#000000" text="{appViewHelper.currentContract.productName}"/>
+			</mx:FormItem>
+			<mx:FormItem label="产品数量:" >
+				<s:Label color="#000000" text="{appViewHelper.currentContract.quantity}"/>
+			</mx:FormItem>
+			<mx:FormItem label="总金额:" >
+				<s:Label color="#000000" text="{currencyFormatter.format(appViewHelper.currentContract.amount)}" />
+			</mx:FormItem>
+			</mx:Form>
+		<mx:Form width="50%" 
+				 paddingLeft="10" 
+				 paddingRight="10" 
+				 paddingTop="10" 
+				 paddingBottom="10" 
+				 right="0" 
+				 top="0" 
+				 bottom="0" 
+				 color="#0b0282">
+			<mx:FormItem label="合同编号:">
+				<s:Label color="#000000" text="{appViewHelper.currentContract.id}"/>
+			</mx:FormItem>
+			<mx:FormItem label="乙方代表:">
+				<s:Label color="#000000" text="{appViewHelper.currentContract.secondParty}"/>
+			</mx:FormItem>
+			<mx:FormItem label="状态:">
+				<s:Label color="#000000" text="{appViewHelper.currentContract.state}"/>
+			</mx:FormItem>
+			<mx:FormItem label="产品单价:">
+				<s:Label color="#000000" text="{currencyFormatter.format(appViewHelper.currentContract.price)}"/>
+			</mx:FormItem>
+		</mx:Form>
+		</s:Group>
+	<s:HGroup horizontalAlign="center" width="100%" bottom="10">
+		<s:Button label="返回" click="backHandler(event)"    x="197" y="164"/>
+	</s:HGroup>
+</s:Group>

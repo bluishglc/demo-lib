@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Account">
+
+  <typeAlias alias="account" type="com.ibatis.jpetstore.domain.Account"/>
+
+  <select id="getAccountByUsername" resultClass="account" parameterClass="string">
+    SELECT
+    	  ACCOUNT.ID,
+          ACCOUNT.USERNAME,
+          ACCOUNT.PASSWORD,
+          ACCOUNT.EMAIL,
+          ACCOUNT.FIRSTNAME,
+          ACCOUNT.LASTNAME,
+          ACCOUNT.STATUS,
+          ACCOUNT.ADDR1 AS address1,
+          ACCOUNT.ADDR2 AS address2,
+          ACCOUNT.CITY,
+          ACCOUNT.STATE,
+          ACCOUNT.ZIP,
+          ACCOUNT.COUNTRY,
+          ACCOUNT.PHONE,
+          PROFILE.LANGPREF AS languagePreference,
+          PROFILE.FAVCATEGORY AS favouriteCategoryId,
+          PROFILE.MYLISTOPT AS listOption,
+          PROFILE.BANNEROPT AS bannerOption,
+          BANNERDATA.BANNERNAME
+    FROM 
+    	ACCOUNT, PROFILE, BANNERDATA
+    WHERE 
+    	ACCOUNT.USERNAME = #username# AND 
+      	PROFILE.USERID = ACCOUNT.ID AND 
+      	PROFILE.FAVCATEGORY = BANNERDATA.FAVCATEGORY
+  </select>
+
+  <select id="getAccountByUsernameAndPassword" resultClass="account" parameterClass="account">
+    SELECT
+      ACCOUNT.ID,
+      ACCOUNT.USERNAME,
+      ACCOUNT.PASSWORD,
+      ACCOUNT.EMAIL,
+      ACCOUNT.FIRSTNAME,
+      ACCOUNT.LASTNAME,
+      ACCOUNT.STATUS,
+      ACCOUNT.ADDR1 AS address1,
+      ACCOUNT.ADDR2 AS address2,
+      ACCOUNT.CITY,
+      ACCOUNT.STATE,
+      ACCOUNT.ZIP,
+      ACCOUNT.COUNTRY,
+      ACCOUNT.PHONE,
+      PROFILE.LANGPREF AS languagePreference,
+      PROFILE.FAVCATEGORY AS favouriteCategoryId,
+      PROFILE.MYLISTOPT AS listOption,
+      PROFILE.BANNEROPT AS bannerOption,
+      BANNERDATA.BANNERNAME
+    FROM 
+    	ACCOUNT, PROFILE, BANNERDATA
+    WHERE 
+    	ACCOUNT.USERNAME = #username# AND 
+      	ACCOUNT.PASSWORD = #password# AND 
+      	PROFILE.USERID = ACCOUNT.ID AND 
+      	PROFILE.FAVCATEGORY = BANNERDATA.FAVCATEGORY
+  </select>
+
+  <update id="updateAccount" parameterClass="account">
+    UPDATE ACCOUNT SET
+      EMAIL = #email#,
+      FIRSTNAME = #firstName#,
+      LASTNAME = #lastName#,
+      STATUS = #status#,
+      ADDR1 = #address1#,
+      ADDR2 = #address2:VARCHAR#,
+      CITY = #city#,
+      STATE = #state#,
+      ZIP = #zip#,
+      COUNTRY = #country#,
+      PHONE = #phone#
+    WHERE ID = #id#
+  </update>
+
+  <insert id="insertAccount" parameterClass="account">
+    INSERT INTO ACCOUNT
+      (ID, EMAIL, FIRSTNAME, LASTNAME, STATUS, ADDR1, ADDR2, CITY, STATE, ZIP, COUNTRY, PHONE, USERNAME, PASSWORD)
+    VALUES
+      (#id#, #email#, #firstName#, #lastName#, #status#, #address1#,  #address2:VARCHAR#, #city#, #state#, #zip#, #country#, #phone#, #username#, #password#)
+  </insert>
+
+  <update id="updateProfile" parameterClass="account">
+    UPDATE PROFILE SET
+      LANGPREF = #languagePreference#,
+      FAVCATEGORY = #favouriteCategoryId#,
+      MYLISTOPT = #listOption#,
+      BANNEROPT = #bannerOption#
+    WHERE USERID = #id#
+  </update>
+
+  <insert id="insertProfile" parameterClass="account">
+    INSERT INTO PROFILE (LANGPREF, FAVCATEGORY, MYLISTOPT, BANNEROPT, USERID)
+    VALUES (#languagePreference#, #favouriteCategoryId#, #listOption#, #bannerOption#, #id#)
+  </insert>
+
+</sqlMap>

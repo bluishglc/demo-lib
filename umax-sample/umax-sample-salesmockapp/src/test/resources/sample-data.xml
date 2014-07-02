@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<table name="app_user">
+		<column>id</column>
+		<column>username</column>
+		<column>password</column>
+		<column>first_name</column>
+		<column>last_name</column>
+		<column>address</column>
+		<column>city</column>
+		<column>country</column>
+		<column>email</column>
+		<column>phone_number</column>
+		<column>postal_code</column>
+		<column>province</column>
+		<column>website</column>
+		<column>password_hint</column>
+		<column>version</column>
+		<column>account_enabled</column>
+		<column>account_expired</column>
+		<column>account_locked</column>
+		<column>credentials_expired</column>
+		<row>
+			<value description="id">-1</value>
+			<value description="username">user</value>
+			<value description="password">12dea96fec20593566ab75692c9949596833adc9</value>
+			<value description="first_name">Tomcat</value>
+			<value description="last_name">User</value>
+			<value description="address"></value>
+			<value description="city">Denver</value>
+			<value description="country">US</value>
+			<value description="email">matt_raible@yahoo.com</value>
+			<value description="phone_number"></value>
+			<value description="postal_code">80210</value>
+			<value description="province">CO</value>
+			<value description="website">http://tomcat.apache.org</value>
+			<value description="password_hint"><![CDATA[A male kitty.]]></value>
+			<value description="version">1</value>
+			<value description="account_enabled">1</value>
+			<value description="account_expired">0</value>
+			<value description="account_locked">0</value>
+			<value description="credentials_expired">0</value>
+		</row>
+		<row>
+			<value description="id">-2</value>
+			<value description="username">admin</value>
+			<value description="password">d033e22ae348aeb5660fc2140aec35850c4da997
+			</value>
+			<value description="first_name">Matt</value>
+			<value description="last_name">Raible</value>
+			<value description="address"></value>
+			<value description="city">Denver</value>
+			<value description="country">US</value>
+			<value description="email">matt@raibledesigns.com</value>
+			<value description="phone_number"></value>
+			<value description="postal_code">80210</value>
+			<value description="province">CO</value>
+			<value description="website">http://raibledesigns.com</value>
+			<value description="password_hint"><![CDATA[Not a female kitty.]]></value>
+			<value description="version">1</value>
+			<value description="account_enabled">1</value>
+			<value description="account_expired">0</value>
+			<value description="account_locked">0</value>
+			<value description="credentials_expired">0</value>
+		</row>
+	</table>
+	<table name="role">
+		<column>id</column>
+		<column>name</column>
+		<column>description</column>
+		<row>
+			<value description="id">-1</value>
+			<value description="name">ROLE_ADMIN</value>
+			<value description="description"><![CDATA[Administrator role (can edit Users)]]></value>
+		</row>
+		<row>
+			<value description="id">-2</value>
+			<value description="name">ROLE_USER</value>
+			<value description="description"><![CDATA[Default role for all Users]]></value>
+		</row>
+	</table>
+	<table name="user_role">
+		<column>user_id</column>
+		<column>role_id</column>
+		<row>
+			<value description="user_id">-1</value>
+			<value description="role_id">-2</value>
+		</row>
+		<row>
+			<value description="user_id">-2</value>
+			<value description="role_id">-1</value>
+		</row>
+	</table>
+	<table name="customer">
+		<column>id</column>
+		<column>name</column>
+		<column>email</column>
+		<column>phone_number</column>
+		<column>address</column>
+		<column>version</column>
+		<row>
+			<value description="id">-1</value>
+			<value description="name"><![CDATA[北电科技]]></value>
+			<value description="email">purchase@oracle.com</value>
+			<value description="phone_number">086-010-2313111</value>
+			<value description="address"><![CDATA[北京市海淀区中关村大街1800号]]></value>
+			<value description="version">1</value>
+		</row>
+		<row>
+			<value description="id">-2</value>
+			<value description="name"><![CDATA[上海宏达]]></value>
+			<value description="email">purchase@ibm.com</value>
+			<value description="phone_number">086-021-78964111</value>
+			<value description="address"><![CDATA[上海市浦东新区祖冲之路999号]]></value>
+			<value description="version">1</value>
+		</row>
+	</table>
+	<table name="contract">
+		<column>id</column>
+		<column>first_party_id</column>
+		<column>second_party</column>
+		<column>date</column>
+		<column>product_name</column>
+		<column>price</column>
+		<column>quantity</column>
+		<column>amount</column>
+		<column>state</column>
+		<column>version</column>
+		<row>
+			<value description="id">-1</value>
+			<value description="first_party_id">-1</value>
+			<value description="second_party">威化集团</value>
+			<value description="date">2011-01-01 00:00:00</value>
+			<value description="product_name">化学试剂</value>
+			<value description="price">2000</value>
+			<value description="quantity">5</value>
+			<value description="amount">10000</value>
+			<value description="state">新建</value>
+			<value description="version">1</value>
+		</row>
+		<row>
+			<value description="id">-2</value>
+			<value description="first_party_id">-2</value>
+			<value description="second_party">威化集团</value>
+			<value description="date">2011-01-01 00:00:00</value>
+			<value description="product_name">配电板</value>
+			<value description="price">3000</value>
+			<value description="quantity">10</value>
+			<value description="amount">30000</value>
+			<value description="state">新建</value>
+			<value description="version">1</value>
+		</row>
+		<row>
+			<value description="id">-3</value>
+			<value description="first_party_id">-1</value>
+			<value description="second_party">威化集团</value>
+			<value description="date">2011-01-02 00:00:00</value>
+			<value description="product_name">镁碳砖</value>
+			<value description="price">3100</value>
+			<value description="quantity">10</value>
+			<value description="amount">31000</value>
+			<value description="state">新建</value>
+			<value description="version">1</value>
+		</row>
+		<row>
+			<value description="id">-4</value>
+			<value description="first_party_id">-2</value>
+			<value description="second_party">威化集团</value>
+			<value description="date">2010-08-01 00:00:00</value>
+			<value description="product_name">电焊条</value>
+			<value description="price">2000</value>
+			<value description="quantity">10</value>
+			<value description="amount">20000</value>
+			<value description="state">新建</value>
+			<value description="version">1</value>
+		</row>
+		<row>
+			<value description="id">-5</value>
+			<value description="first_party_id">-1</value>
+			<value description="second_party">威化集团</value>
+			<value description="date">2009-06-01 00:00:00</value>
+			<value description="product_name">轴承</value>
+			<value description="price">1000</value>
+			<value description="quantity">5</value>
+			<value description="amount">5000</value>
+			<value description="state">新建</value>
+			<value description="version">1</value>
+		</row>
+		<row>
+			<value description="id">-6</value>
+			<value description="first_party_id">-2</value>
+			<value description="second_party">威化集团</value>
+			<value description="date">2010-08-21 00:00:00</value>
+			<value description="product_name">LED显示屏</value>
+			<value description="price">3000</value>
+			<value description="quantity">10</value>
+			<value description="amount">30000</value>
+			<value description="state">新建</value>
+			<value description="version">1</value>
+		</row>
+	</table>
+</dataset>

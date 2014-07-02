@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="ExamineContractProcess" name="ExamineContractProcess">
+    <documentation>Place documentation for the 'ExamineContractProcess' process here.</documentation>
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <userTask id="salesManagerReviewTask" name="销售经理复查合同" activiti:candidateGroups="Sales Manager">
+      <documentation>由销售经理对请求的合同进行复查。</documentation>
+    </userTask>
+    <userTask id="salesDirectorReviewTask" name="销售总监复查合同" activiti:candidateGroups="Sales Director">
+      <documentation>由销售总监对请求的合同进行复查。</documentation>
+    </userTask>
+    <exclusiveGateway id="exclusivegateway2" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow5" name="" sourceRef="salesManagerReviewTask" targetRef="exclusivegateway2"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway3" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow6" name="" sourceRef="salesDirectorReviewTask" targetRef="exclusivegateway3"></sequenceFlow>
+    <serviceTask id="passExamTask" name="passExamTask" activiti:expression="#{contractService.setContractState(contractId,&quot;审核通过&quot;)}"></serviceTask>
+    <sequenceFlow id="flow7" name="" sourceRef="exclusivegateway2" targetRef="salesDirectorReviewTask">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${salesManagerApproved==true}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow8" name="" sourceRef="exclusivegateway3" targetRef="passExamTask">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${salesDirectorApproved==true}]]></conditionExpression>
+    </sequenceFlow>
+    <serviceTask id="failExamTask" name="failExamTask" activiti:expression="#{contractService.setContractState(contractId,&quot;审核驳回&quot;)}"></serviceTask>
+    <sequenceFlow id="flow9" name="" sourceRef="exclusivegateway2" targetRef="failExamTask">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${salesManagerApproved==false}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow10" name="" sourceRef="exclusivegateway3" targetRef="failExamTask">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${salesDirectorApproved==false}]]></conditionExpression>
+    </sequenceFlow>
+    <exclusiveGateway id="exclusivegateway4" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow11" name="" sourceRef="passExamTask" targetRef="exclusivegateway4"></sequenceFlow>
+    <sequenceFlow id="flow12" name="" sourceRef="failExamTask" targetRef="exclusivegateway4"></sequenceFlow>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow13" name="" sourceRef="exclusivegateway4" targetRef="endevent1"></sequenceFlow>
+    <sequenceFlow id="flow14" name="" sourceRef="startevent1" targetRef="setContractStateAsExaminingTask"></sequenceFlow>
+    <serviceTask id="setContractStateAsExaminingTask" name="setContractStateAsExaminingTask" activiti:expression="#{contractService.setContractState(contractId,&quot;审核中&quot;)}"></serviceTask>
+    <sequenceFlow id="flow15" name="" sourceRef="setContractStateAsExaminingTask" targetRef="salesManagerReviewTask"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_ExamineContractProcess">
+    <bpmndi:BPMNPlane bpmnElement="ExamineContractProcess" id="BPMNPlane_ExamineContractProcess">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35" width="35" x="92" y="-40"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="salesManagerReviewTask" id="BPMNShape_salesManagerReviewTask">
+        <omgdc:Bounds height="55" width="105" x="57" y="170"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="salesDirectorReviewTask" id="BPMNShape_salesDirectorReviewTask">
+        <omgdc:Bounds height="55" width="105" x="57" y="370"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway2" id="BPMNShape_exclusivegateway2">
+        <omgdc:Bounds height="40" width="40" x="89" y="280"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway3" id="BPMNShape_exclusivegateway3">
+        <omgdc:Bounds height="40" width="40" x="89" y="490"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="passExamTask" id="BPMNShape_passExamTask">
+        <omgdc:Bounds height="55" width="105" x="57" y="600"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="failExamTask" id="BPMNShape_failExamTask">
+        <omgdc:Bounds height="55" width="105" x="290" y="600"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway4" id="BPMNShape_exclusivegateway4">
+        <omgdc:Bounds height="40" width="40" x="89" y="722"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35" width="35" x="92" y="820"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="setContractStateAsExaminingTask" id="BPMNShape_setContractStateAsExaminingTask">
+        <omgdc:Bounds height="55" width="105" x="57" y="60"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="109" y="225"></omgdi:waypoint>
+        <omgdi:waypoint x="109" y="280"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="109" y="425"></omgdi:waypoint>
+        <omgdi:waypoint x="109" y="490"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="109" y="320"></omgdi:waypoint>
+        <omgdi:waypoint x="109" y="370"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="109" y="530"></omgdi:waypoint>
+        <omgdi:waypoint x="109" y="600"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow9" id="BPMNEdge_flow9">
+        <omgdi:waypoint x="129" y="300"></omgdi:waypoint>
+        <omgdi:waypoint x="342" y="300"></omgdi:waypoint>
+        <omgdi:waypoint x="342" y="516"></omgdi:waypoint>
+        <omgdi:waypoint x="342" y="551"></omgdi:waypoint>
+        <omgdi:waypoint x="342" y="600"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow10" id="BPMNEdge_flow10">
+        <omgdi:waypoint x="129" y="510"></omgdi:waypoint>
+        <omgdi:waypoint x="342" y="510"></omgdi:waypoint>
+        <omgdi:waypoint x="342" y="600"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow11" id="BPMNEdge_flow11">
+        <omgdi:waypoint x="109" y="655"></omgdi:waypoint>
+        <omgdi:waypoint x="109" y="720"></omgdi:waypoint>
+        <omgdi:waypoint x="109" y="722"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow12" id="BPMNEdge_flow12">
+        <omgdi:waypoint x="342" y="655"></omgdi:waypoint>
+        <omgdi:waypoint x="342" y="742"></omgdi:waypoint>
+        <omgdi:waypoint x="109" y="722"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow13" id="BPMNEdge_flow13">
+        <omgdi:waypoint x="109" y="762"></omgdi:waypoint>
+        <omgdi:waypoint x="109" y="820"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow14" id="BPMNEdge_flow14">
+        <omgdi:waypoint x="109" y="-5"></omgdi:waypoint>
+        <omgdi:waypoint x="109" y="60"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow15" id="BPMNEdge_flow15">
+        <omgdi:waypoint x="109" y="115"></omgdi:waypoint>
+        <omgdi:waypoint x="109" y="170"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

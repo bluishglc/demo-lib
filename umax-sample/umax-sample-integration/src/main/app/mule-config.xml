@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ws="http://www.mulesoft.org/schema/mule/ws"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
+	xmlns:spring-security="http://www.mulesoft.org/schema/mule/spring-security"
+	xmlns:pattern="http://www.mulesoft.org/schema/mule/pattern"
+	xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/3.1/mule-ws.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.1/mule.xsd
+        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.1/mule-http.xsd
+        http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/3.1/mule-vm.xsd
+        http://www.mulesoft.org/schema/mule/spring-security http://www.mulesoft.org/schema/mule/spring-security/3.1/mule-spring-security.xsd
+        http://www.mulesoft.org/schema/mule/pattern http://www.mulesoft.org/schema/mule/pattern/3.1/mule-pattern.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.mulesoft.org/schema/mule/file hhttp://www.mulesoft.org/schema/mule/file/3.1/mule-file.xsd">
+	
+	<!-- Services from SalesApp -->
+	
+	<pattern:web-service-proxy name="ContractService"
+		inboundAddress="http://localhost:9090/services/ContractService"
+		outboundAddress="http://localhost:6060/umax-sample-salesmockapp/services/ContractService"
+	/>
+	
+	<pattern:web-service-proxy name="SalesAppCustomerService"
+		inboundAddress="http://localhost:9090/services/SalesAppCustomerService"
+		outboundAddress="http://localhost:6060/umax-sample-salesmockapp/services/CustomerService"
+	/>
+
+	<!-- Services from FinancialApp -->
+		
+	<pattern:web-service-proxy name="CreditService"
+		inboundAddress="http://localhost:9090/services/CreditService"
+		outboundAddress="http://localhost:7070/umax-sample-financialmockapp/services/CreditService"
+	/>
+	
+	<pattern:web-service-proxy name="FinancialAppCustomerService"
+		inboundAddress="http://localhost:9090/services/FinancialAppCustomerService"
+		outboundAddress="http://localhost:7070/umax-sample-financialmockapp/services/CustomerService"
+	/>
+	
+	<!-- Composite Services -->
+	
+	<pattern:web-service-proxy name="FinancialRiskEvaluationService"
+		inboundAddress="http://localhost:9090/services/FinancialRiskEvaluationService"
+		outboundAddress="http://localhost:5050/umax-sample-composite/services/FinancialRiskEvaluationService"
+	/>
+	
+	<!-- Workflow Services -->
+	
+	<pattern:web-service-proxy name="TaskService"
+		inboundAddress="http://localhost:9090/services/TaskService"
+		outboundAddress="http://localhost:4040/umax-sample-workflow/services/TaskService"
+	/>
+	
+	<!-- Security Services -->
+	<pattern:web-service-proxy name="UserService"
+		inboundAddress="http://localhost:9090/services/UserService"
+		outboundAddress="http://localhost:3030/umax-sample-security/services/UserService"
+	/>
+	
+	<!-- Provide crossdomain.xml -->
+	<flow name="crossDomainFileProvider">
+		<http:inbound-endpoint address="http://localhost:9090/crossdomain.xml" />
+		<component>
+			<singleton-object class="org.mule.component.simple.StaticComponent">
+				<property key="dataFile" value="crossdomain.xml" />
+			</singleton-object>
+		</component>
+	</flow>
+	
+	</mule>

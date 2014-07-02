@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="150" height="150">
+	<fx:Declarations>
+		
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Image;
+			import mx.controls.Label;
+			
+			public var centerX:int = 50;
+			public var centerY:int = 50;
+			
+			public var hourHand:Image;
+			public var minuteHand:Image;
+			public var secondHand:Image;
+			
+			public var currentTime:Date;
+			
+			[Embed('assets/images/ClockHourHand.png')]
+			private var hourHandImage:Class;
+			[Embed('assets/images/ClockMinuteHand.png')]
+			private var minuteHandImage:Class;
+			[Embed('assets/images/ClockSecondHand.png')]
+			private var secondHandImage:Class;
+			
+			public function init():void 
+			{
+				createHands();
+			}
+			
+			public function createHands():void
+			{
+				var time:Date = new Date();
+				
+				var seconds:uint = time.getSeconds();
+				var minutes:uint = time.getMinutes();
+				var hours:uint = time.getHours();
+					
+				this.hourHand = new Image();
+				var hourHandBitmap:Bitmap = new hourHandImage();
+				hourHandBitmap.smoothing = true;
+				this.hourHand.source = hourHandBitmap;
+				this.hourHand.x = 70;
+				this.hourHand.y = 50;
+				this.addElement(this.hourHand);
+					
+				var m:Matrix = this.hourHand.transform.matrix;
+				var ox:int = this.hourHand.x + 7;
+				var oy:int = this.hourHand.y + 28;
+				m.translate(-ox, -oy);
+				m.rotate(Math.PI/180 * ((hours * 30) + (minutes * 0.5)));
+				m.translate(ox, oy);
+				this.hourHand.transform.matrix = m;
+				
+				this.minuteHand = new Image();
+				var minuteHandBitmap:Bitmap = new minuteHandImage();
+				minuteHandBitmap.smoothing = true;
+				this.minuteHand.source = minuteHandBitmap;
+				this.minuteHand.x = 68;
+				this.minuteHand.y = 38;
+				this.addElement(this.minuteHand);
+				
+				m = this.minuteHand.transform.matrix;
+				ox = this.minuteHand.x + 8;
+				oy = this.minuteHand.y + 39;
+				m.translate(-ox, -oy);
+				m.rotate(Math.PI/30 * minutes);
+				m.translate(ox, oy);
+				this.minuteHand.transform.matrix = m;
+				
+				this.secondHand = new Image();
+				var secondHandBitmap:Bitmap = new secondHandImage();
+				secondHandBitmap.smoothing = true;
+				this.secondHand.source = secondHandBitmap;
+				this.secondHand.x = 73;
+				this.secondHand.y = 27;
+				this.addElement(this.secondHand);
+				
+				m = this.secondHand.transform.matrix;
+				ox =  this.secondHand.x + 3.5;
+				oy = this.secondHand.y + 50;
+				m.translate(-ox, -oy);
+				m.rotate(Math.PI/30 * seconds);
+				m.translate(ox, oy);
+				this.secondHand.transform.matrix = m;
+			}
+			
+			
+			public function draw():void
+			{
+				// Stores the current date and time in an instance variable
+				currentTime = new Date();
+				showTime(currentTime);
+			}
+			
+			/**
+			 * Displays the given Date/Time in that good old analog clock style.
+			 */
+			public function showTime(time:Date):void 
+			{
+				var seconds:uint = time.getSeconds();
+				var minutes:uint = time.getMinutes();
+				var hours:uint = time.getHours();
+				
+				if (seconds == 0) {
+				
+					this.removeElement(this.hourHand);
+					this.hourHand = new Image();
+					var hourHandBitmap:Bitmap = new hourHandImage();
+					hourHandBitmap.smoothing = true;
+					this.hourHand.source = hourHandBitmap;
+					this.hourHand.x = 70;
+					this.hourHand.y = 50;
+					this.addElement(this.hourHand);
+					
+					m = this.hourHand.transform.matrix;
+					ox = this.hourHand.x + 7;
+					oy = this.hourHand.y + 28;
+					m.translate(-ox, -oy);
+					m.rotate(Math.PI/180 * ((hours * 30) + (minutes * 0.5)));
+					m.translate(ox, oy);
+					this.hourHand.transform.matrix = m;
+					
+					this.removeElement(this.minuteHand);
+					this.minuteHand = new Image();
+					var minuteHandBitmap:Bitmap = new minuteHandImage();
+					minuteHandBitmap.smoothing = true;
+					this.minuteHand.source = minuteHandBitmap;
+					this.minuteHand.x = 68;
+					this.minuteHand.y = 38;
+					this.addElement(this.minuteHand);
+					
+					m = this.minuteHand.transform.matrix;
+					ox = this.minuteHand.x + 8;
+					oy = this.minuteHand.y + 39;
+					m.translate(-ox, -oy);
+					m.rotate(Math.PI/30 * minutes);
+					m.translate(ox, oy);
+					this.minuteHand.transform.matrix = m;
+					
+					this.removeElement(this.secondHand);
+					this.secondHand = new Image();
+					var secondHandBitmap:Bitmap = new secondHandImage();
+					secondHandBitmap.smoothing = true;
+					this.secondHand.source = secondHandBitmap;
+					this.secondHand.x = 73;
+					this.secondHand.y = 27;
+					this.addElement(this.secondHand);
+					
+				} else {
+				
+					var m:Matrix = this.secondHand.transform.matrix;
+					var ox:int =  76.5;
+					var oy:int = 77;
+					m.translate(-ox, -oy);
+					m.rotate(Math.PI/30);
+					m.translate(ox, oy);
+					this.secondHand.transform.matrix = m;
+					
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:Rect width="100%" height="100%">
+		<s:fill>
+			<s:BitmapFill source="@Embed('assets/images/ClockFace.png')" smooth="true"/>
+		</s:fill>
+	</s:Rect>
+</s:Group>

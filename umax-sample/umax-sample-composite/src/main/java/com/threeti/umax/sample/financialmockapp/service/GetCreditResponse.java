@@ -1,0 +1,60 @@
+
+package com.threeti.umax.sample.financialmockapp.service;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
+
+
+/**
+ * <p>Java class for getCreditResponse complex type.
+ * 
+ * <p>The following schema fragment specifies the expected content contained within this class.
+ * 
+ * <pre>
+ * &lt;complexType name="getCreditResponse">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="credit" type="{http://service.financialmockapp.sample.umax.threeti.com/}credit" minOccurs="0"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "getCreditResponse", propOrder = {
+    "credit"
+})
+public class GetCreditResponse {
+
+    protected Credit credit;
+
+    /**
+     * Gets the value of the credit property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Credit }
+     *     
+     */
+    public Credit getCredit() {
+        return credit;
+    }
+
+    /**
+     * Sets the value of the credit property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Credit }
+     *     
+     */
+    public void setCredit(Credit value) {
+        this.credit = value;
+    }
+
+}

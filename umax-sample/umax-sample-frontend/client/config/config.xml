@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Config>
+	<Urls>
+		<Url name="XX1Url" value="http://localhost:8080/project/url1"/>
+		<Url name="XX2Url" value="http://localhost:8080/project/url2"/>
+	</Urls>
+	
+	<Apps>
+		<App id="1" name="ContractManager" dispName="合同管理" state="closed"/>
+		<App id="2" name="CreditManager" dispName="信用管理" state="closed"/>
+	</Apps>
+</Config>

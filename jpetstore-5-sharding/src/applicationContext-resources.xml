@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       					   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+            			   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+       default-lazy-init="true">
+    
+    <!-- For mail settings and future properties files -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:database.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    
+    <!-- Enable @Transactional support -->
+    <tx:annotation-driven/>
+    
+    <!-- Activates scanning of @Autowired -->
+    <context:annotation-config/>
+
+    <!-- Activates scanning of @Repository -->
+    <context:component-scan base-package="com.ibatis.jpetstore"/>
+    
+    <!-- Transaction manager  -->
+    
+    <!--  
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	-->
+	
+	<bean id="transactionManager" class="com.ibatis.jpetstore.persistence.sharding.transaction.ChainedTransactionManager">
+		<property name="transactionManagers">
+			<list>
+				<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+					<property name="dataSource" ref="accountDataSource0" />
+				</bean>
+				<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+					<property name="dataSource" ref="accountDataSource1" />
+				</bean>
+				<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+					<property name="dataSource" ref="orderDataSource0" />
+				</bean>
+				<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+					<property name="dataSource" ref="orderDataSource1" />
+				</bean>
+				<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+					<property name="dataSource" ref="productDataSource" />
+				</bean>
+				<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+					<property name="dataSource" ref="sequenceDataSource" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+    <!-- DataSources -->
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+        <property name="maxActive" value="100"/>
+        <property name="maxWait" value="1000"/>
+        <property name="poolPreparedStatements" value="true"/>
+        <property name="defaultAutoCommit" value="true"/>
+    </bean>
+
+
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="com/ibatis/jpetstore/persistence/sqlmapdao/sql/sql-map-config.xml" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<constructor-arg ref="sqlMapClient"/>
+	</bean>
+	
+	<!-- Account Shard 0 Data Source -->
+	<bean id="accountDataSource0" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${shard.account0.driver}" />
+		<property name="url" value="${shard.account0.url}" />
+		<property name="username" value="${shard.account0.username}"/>
+        <property name="password" value="${shard.account0.password}"/>
+	</bean>
+
+	<bean id="accountSqlMapClient0" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="com/ibatis/jpetstore/persistence/sqlmapdao/sql/sql-map-config-account.xml" />
+		<property name="dataSource" ref="accountDataSource0" />
+	</bean>
+	
+	<bean id="accountSqlMapClientTemplate0" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<constructor-arg ref="accountSqlMapClient0"/>
+	</bean>
+	
+	<bean id="accountShard0" class="com.ibatis.jpetstore.persistence.sharding.Shard">
+		<property name="id" value="accountShard0"/>
+		<property name="sqlMapClientTemplate" ref="accountSqlMapClientTemplate0"/>
+	</bean>
+    
+   <!-- Account Shard 1 Data Source -->
+   
+   	<bean id="accountDataSource1" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${shard.account1.driver}" />
+		<property name="url" value="${shard.account1.url}" />
+		<property name="username" value="${shard.account1.username}"/>
+        <property name="password" value="${shard.account1.password}"/>
+	</bean>
+
+	<bean id="accountSqlMapClient1" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="com/ibatis/jpetstore/persistence/sqlmapdao/sql/sql-map-config-account.xml" />
+		<property name="dataSource" ref="accountDataSource1" />
+	</bean>
+	
+	<bean id="accountSqlMapClientTemplate1" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<constructor-arg ref="accountSqlMapClient1"/>
+	</bean>
+		
+	<bean id="accountShard1" class="com.ibatis.jpetstore.persistence.sharding.Shard">
+		<property name="id" value="accountShard1"/>
+		<property name="sqlMapClientTemplate" ref="accountSqlMapClientTemplate1"/>
+	</bean>
+
+	<!-- Order Shard 0 Data Source -->
+	<bean id="orderDataSource0" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${shard.order0.driver}" />
+		<property name="url" value="${shard.order0.url}" />
+		<property name="username" value="${shard.order0.username}"/>
+        <property name="password" value="${shard.order0.password}"/>
+	</bean>
+
+	<bean id="orderSqlMapClient0" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="com/ibatis/jpetstore/persistence/sqlmapdao/sql/sql-map-config-order.xml" />
+		<property name="dataSource" ref="orderDataSource0" />
+	</bean>
+	
+	<bean id="orderSqlMapClientTemplate0" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<constructor-arg ref="orderSqlMapClient0"/>
+	</bean>
+	
+	<bean id="orderShard0" class="com.ibatis.jpetstore.persistence.sharding.Shard">
+		<property name="id" value="orderShard0"/>
+		<property name="sqlMapClientTemplate" ref="orderSqlMapClientTemplate0"/>
+	</bean>
+	
+	<!-- Order Shard 1 Data Source -->
+   
+   	<bean id="orderDataSource1" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${shard.order1.driver}" />
+		<property name="url" value="${shard.order1.url}" />
+		<property name="username" value="${shard.order1.username}"/>
+        <property name="password" value="${shard.order1.password}"/>
+	</bean>
+
+	<bean id="orderSqlMapClient1" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="com/ibatis/jpetstore/persistence/sqlmapdao/sql/sql-map-config-order.xml" />
+		<property name="dataSource" ref="orderDataSource1" />
+	</bean>
+	
+	<bean id="orderSqlMapClientTemplate1" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<constructor-arg ref="orderSqlMapClient1"/>
+	</bean>
+		
+	<bean id="orderShard1" class="com.ibatis.jpetstore.persistence.sharding.Shard">
+		<property name="id" value="orderShard1"/>
+		<property name="sqlMapClientTemplate" ref="orderSqlMapClientTemplate1"/>
+	</bean>
+	
+	<!-- Product Shard Data Source -->
+   
+   	<bean id="productDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${shard.product.driver}" />
+		<property name="url" value="${shard.product.url}" />
+		<property name="username" value="${shard.product.username}"/>
+        <property name="password" value="${shard.product.password}"/>
+	</bean>
+
+	<bean id="productSqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="com/ibatis/jpetstore/persistence/sqlmapdao/sql/sql-map-config-product.xml" />
+		<property name="dataSource" ref="productDataSource" />
+	</bean>
+	
+	<bean id="productSqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<constructor-arg ref="productSqlMapClient"/>
+	</bean>
+		
+	<bean id="productShard" class="com.ibatis.jpetstore.persistence.sharding.Shard">
+		<property name="id" value="productShard"/>
+		<property name="sqlMapClientTemplate" ref="productSqlMapClientTemplate"/>
+	</bean>
+	
+	<!-- Sequence Shard Data Source -->
+   
+   	<bean id="sequenceDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${shard.sequence.driver}" />
+		<property name="url" value="${shard.sequence.url}" />
+		<property name="username" value="${shard.sequence.username}"/>
+        <property name="password" value="${shard.sequence.password}"/>
+	</bean>
+
+	<bean id="sequenceSqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="com/ibatis/jpetstore/persistence/sqlmapdao/sql/sql-map-config-sequence.xml" />
+		<property name="dataSource" ref="sequenceDataSource" />
+	</bean>
+	
+	<bean id="sequenceSqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<constructor-arg ref="sequenceSqlMapClient"/>
+	</bean>
+		
+	<bean id="sequenceShard" class="com.ibatis.jpetstore.persistence.sharding.Shard">
+		<property name="id" value="sequenceShard"/>
+		<property name="sqlMapClientTemplate" ref="sequenceSqlMapClientTemplate"/>
+	</bean>
+	
+	<!-- Partitions -->
+	
+	<bean id="accountPartition" class="com.ibatis.jpetstore.persistence.sharding.Partition">
+		<property name="id" value="accountPartition"/>
+		<property name="shards">
+			<list>
+				<ref bean="accountShard0"/>
+				<ref bean="accountShard1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="orderPartition" class="com.ibatis.jpetstore.persistence.sharding.Partition">
+		<property name="id" value="orderPartition"/>
+		<property name="shards">
+			<list>
+				<ref bean="orderShard0"/>
+				<ref bean="orderShard1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="productPartition" class="com.ibatis.jpetstore.persistence.sharding.Partition">
+		<property name="id" value="productPartition"/>
+		<property name="shards">
+			<list>
+				<ref bean="productShard"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sequencePartition" class="com.ibatis.jpetstore.persistence.sharding.Partition">
+		<property name="id" value="sequencePartition"/>
+		<property name="shards">
+			<list>
+				<ref bean="sequenceShard"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Shard Locator -->
+	<bean id="shardLocator" class="com.ibatis.jpetstore.persistence.sharding.ShardLocator">
+		<property name="partitions">
+			<map>
+				<entry key="accountPartition" value-ref="accountPartition"/>
+				<entry key="orderPartition" value-ref="orderPartition"/>
+				<entry key="productPartition" value-ref="productPartition"/>
+				<entry key="sequencePartition" value-ref="sequencePartition"/>
+			</map>
+		</property>
+	</bean>
+	
+</beans>

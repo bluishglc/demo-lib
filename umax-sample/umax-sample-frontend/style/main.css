@@ -1,0 +1,18 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace util "com.threeti.UMax.main.util.*";
+
+util|AppView {
+	font-family:"宋体";
+	font-size:12pt;
+}
+
+.datagridHeader {
+	color:#0b0282;
+	text-align:center;
+}
+
+s|Button {
+	skin-class:ClassReference("com.threeti.UMax.main.skin.LoginButtonSkin");
+}

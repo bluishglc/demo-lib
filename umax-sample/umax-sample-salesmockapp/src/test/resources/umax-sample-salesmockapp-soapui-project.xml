@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="umax-sample-salesmockapp" resourceRoot="" soapui-version="4.0.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="ContractServiceSoapBinding" type="wsdl" bindingName="{http://service.salesmockapp.sample.umax.threeti.com/}ContractServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:6060/umax-sample-salesmockapp/services/ContractService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:6060/umax-sample-salesmockapp/services/ContractService?wsdl"><con:part><con:url>http://localhost:6060/umax-sample-salesmockapp/services/ContractService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="ContractService" targetNamespace="http://service.salesmockapp.sample.umax.threeti.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.salesmockapp.sample.umax.threeti.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://service.salesmockapp.sample.umax.threeti.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="contract" type="tns:contract"/>
+      <xs:element name="customer" type="tns:customer"/>
+      <xs:element name="getContract" type="tns:getContract"/>
+      <xs:element name="getContractResponse" type="tns:getContractResponse"/>
+      <xs:element name="getContracts" type="tns:getContracts"/>
+      <xs:element name="getContractsResponse" type="tns:getContractsResponse"/>
+      <xs:element name="saveContract" type="tns:saveContract"/>
+      <xs:element name="saveContractResponse" type="tns:saveContractResponse"/>
+      <xs:complexType name="saveContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="tns:contract"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="contract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" type="xs:double"/>
+          <xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="firstParty" type="tns:customer"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="price" type="xs:double"/>
+          <xs:element minOccurs="0" name="productName" type="xs:string"/>
+          <xs:element minOccurs="0" name="quantity" type="xs:int"/>
+          <xs:element minOccurs="0" name="secondParty" type="xs:string"/>
+          <xs:element minOccurs="0" name="version" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="customer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="address" type="xs:string"/>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="phoneNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="version" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="saveContractResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:contract"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getContracts">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="getContractsResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:contract"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getContractResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:contract"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getContractsResponse">
+    <wsdl:part element="tns:getContractsResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getContractResponse">
+    <wsdl:part element="tns:getContractResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getContracts">
+    <wsdl:part element="tns:getContracts" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveContract">
+    <wsdl:part element="tns:saveContract" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getContract">
+    <wsdl:part element="tns:getContract" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveContractResponse">
+    <wsdl:part element="tns:saveContractResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ContractService">
+    <wsdl:operation name="saveContract">
+      <wsdl:input message="tns:saveContract" name="saveContract"></wsdl:input>
+      <wsdl:output message="tns:saveContractResponse" name="saveContractResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContracts">
+      <wsdl:input message="tns:getContracts" name="getContracts"></wsdl:input>
+      <wsdl:output message="tns:getContractsResponse" name="getContractsResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContract">
+      <wsdl:input message="tns:getContract" name="getContract"></wsdl:input>
+      <wsdl:output message="tns:getContractResponse" name="getContractResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ContractServiceSoapBinding" type="tns:ContractService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="saveContract">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="saveContract">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="saveContractResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContracts">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getContracts">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getContractsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContract">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getContract">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getContractResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ContractService">
+    <wsdl:port binding="tns:ContractServiceSoapBinding" name="ContractManagerImplPort">
+      <soap:address location="http://localhost:6060/umax-sample-salesmockapp/services/ContractService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:6060/umax-sample-salesmockapp/services/ContractService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="getContract" bindingOperationName="getContract" type="Request-Response" outputName="getContractResponse" inputName="getContract" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:6060/umax-sample-salesmockapp/services/ContractService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.salesmockapp.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getContract>
+         <!--Optional:-->
+         <arg0>-2</arg0>
+      </ser:getContract>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.salesmockapp.sample.umax.threeti.com/ContractService/getContract"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="getContracts" bindingOperationName="getContracts" type="Request-Response" outputName="getContractsResponse" inputName="getContracts" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:6060/umax-sample-salesmockapp/services/ContractService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.salesmockapp.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getContracts/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.salesmockapp.sample.umax.threeti.com/ContractService/getContracts"/></con:call></con:operation><con:operation isOneWay="false" action="" name="saveContract" bindingOperationName="saveContract" type="Request-Response" outputName="saveContractResponse" inputName="saveContract" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:6060/umax-sample-salesmockapp/services/ContractService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.salesmockapp.sample.umax.threeti.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:saveContract>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <amount>?</amount>
+            <!--Optional:-->
+            <date>?</date>
+            <!--Optional:-->
+            <firstParty>
+               <!--Optional:-->
+               <address>?</address>
+               <!--Optional:-->
+               <email>?</email>
+               <!--Optional:-->
+               <id>?</id>
+               <!--Optional:-->
+               <name>?</name>
+               <!--Optional:-->
+               <phoneNumber>?</phoneNumber>
+               <!--Optional:-->
+               <version>?</version>
+            </firstParty>
+            <!--Optional:-->
+            <id>?</id>
+            <!--Optional:-->
+            <price>?</price>
+            <!--Optional:-->
+            <productName>?</productName>
+            <!--Optional:-->
+            <quantity>?</quantity>
+            <!--Optional:-->
+            <secondParty>?</secondParty>
+            <!--Optional:-->
+            <version>?</version>
+         </arg0>
+      </ser:saveContract>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.salesmockapp.sample.umax.threeti.com/ContractService/saveContract"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

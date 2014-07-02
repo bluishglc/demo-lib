@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<util:AppView xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="800" height="540"
+		 xmlns:util="com.threeti.UMax.main.util.*" xmlns:view="com.threeti.UMax.CreditManager.view.*"
+		 x="200" y="50" creationComplete="creditListHelper.requesrList()" >
+	<fx:Style>
+		@namespace s "library://ns.adobe.com/flex/spark";
+		@namespace mx "library://ns.adobe.com/flex/mx";
+		@namespace util "com.threeti.UMax.main.util.*";
+		@namespace view "com.threeti.UMax.ContractManager.view.*";
+		
+		.df {
+			up-skin:Embed("assets/images/icons/datefield_button_up.png");
+			down-skin:Embed("assets/images/icons/datefield_button_up.png");
+			over-skin:Embed("assets/images/icons/datefield_button_up.png");
+			disabled-skin:Embed("assets/images/icons/datefield_button_disabled.png");
+		}
+	</fx:Style>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<view:CreditListHelper id="creditListHelper" view="{this}" />
+		<mx:CurrencyFormatter useThousandsSeparator="true" decimalSeparatorFrom="." id="currencyFormatter"/>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.managers.PopUpManager;
+			[Bindable]
+			public var current:Object;
+			public function myGrid_doubleClickHander(event:MouseEvent):void
+			{
+				var cred:int=this.myGrid.selectedIndex;
+				if(cred>=0){
+				var credit:CreditListdetail=new CreditListdetail();
+				credit.creditDet=this;
+				PopUpManager.addPopUp(credit,this,true);
+				PopUpManager.centerPopUp(credit);
+				current=this.myGrid.selectedItem;
+			}
+			
+//			private function Format(item:Object,column:DataGridColumn):String
+//			{
+//					return currencyFormatter.format(item.price);
+//					
+//			}
+//			private function Formats(item:Object,column:DataGridColumn):String
+//			{
+//				return currencyFormatter.format(item.amount);
+//					
+//			}
+				
+
+			/* if(!currView.myGrid.selectedItem)
+			{
+			return;		
+			}
+			currView.currentState="edit";
+			current=currView.myGrid.selectedItem;
+			currView.width = 276;
+			currView.height = 260; */
+			
+			}
+			
+			private function Formats(item:Object,column:DataGridColumn):String
+			{
+			return currencyFormatter.format(item.debt);				
+			}
+			
+		]]>
+	</fx:Script>
+	<util:states>
+		<s:State name="main"/>
+		<s:State name="edit"/>
+	</util:states>
+	
+	<util:layout>
+		<s:VerticalLayout gap="0" clipAndEnableScrolling="true"/>
+	</util:layout>
+	
+	<s:Group width="100%">
+		<s:Rect left="0" right="0" top="0" bottom="0">
+			<s:fill>
+				<s:SolidColor color="#edecec"/>
+			</s:fill>
+			<s:stroke>
+				<s:SolidColorStroke color="#d1d1d1" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+	<s:VGroup  width="100%" height="149" gap="10" paddingTop="10" horizontalAlign="center" includeIn="main">
+		<s:HGroup>
+		<mx:FormItem label="客户名称:" width="209">
+			<s:TextInput width="132" />
+		</mx:FormItem>
+		<mx:FormItem x="358" label="信用限制状态:" width="279">
+			<s:DropDownList width="160" />
+		</mx:FormItem>
+		</s:HGroup>
+		<s:HGroup >
+		<mx:FormItem label="信用额度(人民币):" direction="horizontal" labelWidth="100" horizontalGap="0" width="583">
+			<s:TextInput width="190" />
+			<s:Label text="至" height="100%" textAlign="center" verticalAlign="middle" width="20"/>
+			<s:TextInput width="190" />
+		</mx:FormItem>
+			</s:HGroup>
+		<s:HGroup id="hg">
+		<mx:FormItem x="382" y="50" label="更新日期:" direction="horizontal" labelWidth="100" horizontalGap="0" width="584">
+			<mx:DateField  width="190" styleName="df"/>
+			<s:Label text="至" width="20" height="100%" textAlign="center" verticalAlign="middle"/>
+			<mx:DateField  width="190" styleName="df"/>
+		</mx:FormItem>
+		</s:HGroup>
+		<s:HGroup horizontalAlign="right" width="{hg.width}">
+		<mx:FormItem>
+			<s:Button label="搜索" click="creditListHelper.requesrList()"   />
+		</mx:FormItem>
+			<mx:Spacer width="58"/>
+		</s:HGroup>	
+	</s:VGroup>
+		</s:Group>
+	<mx:Spacer height="20"/>
+	<s:Group width="100%" includeIn="main">
+		<s:layout>
+			<s:HorizontalLayout paddingLeft="20" paddingTop="5" paddingBottom="5" />
+		</s:layout>
+		<s:Button label="新建"  />
+		<s:Button label="编辑"  />
+		<s:Button label="删除"  />
+		<s:Button label="打印"  />
+		<s:Button label="导出"  />
+	</s:Group>
+	<s:Group width="100%" height="100%" includeIn="main">
+			<s:Rect left="0" right="0" top="0" bottom="10.5">
+				<s:fill>
+					<s:SolidColor color="#edecec"/>
+				</s:fill>
+				<s:stroke>
+					<s:SolidColorStroke color="#d1d1d1" weight="1"/>
+				</s:stroke>
+			</s:Rect>
+	<mx:DataGrid left="10" right="10" top="10" bottom="10" id="myGrid" doubleClickEnabled="true"  
+				 doubleClick="creditListHelper.myGrid_doubleClickHander(event)" headerStyleName="list_head">
+		<mx:columns>
+			<mx:DataGridColumn headerText="客户名称" dataField="customer.name"/>
+			<mx:DataGridColumn headerText="信用额度" dataField="creditLine"/>
+			<mx:DataGridColumn headerText="欠款金额" dataField="debt" labelFunction="Formats"/>
+		</mx:columns>
+	</mx:DataGrid>
+	</s:Group>
+	<view:CreditListdetail includeIn="edit" back="creditListHelper.contractapprovel_backHandler(event)" creditListHelper="{creditListHelper}"/>
+</util:AppView>
