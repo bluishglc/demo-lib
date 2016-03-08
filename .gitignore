@@ -1,0 +1,16 @@
+*.ipr
+*.iml
+*.iws
+.idea/
+.idea_modules/
+target/
+reports/
+.project
+.classpath
+.scala_dependencies
+project/boot/
+project/plugins/project/build.properties
+project/build/target/
+project/plugins/target/
+logs/
+log/
