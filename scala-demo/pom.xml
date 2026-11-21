@@ -8,12 +8,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-library</artifactId>
-            <version>${scala.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.12</version>
@@ -27,6 +21,11 @@
             <groupId>com.typesafe</groupId>
             <artifactId>config</artifactId>
             <version>${config.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json4s</groupId>
+            <artifactId>json4s-native_2.10</artifactId>
+            <version>${json4s.version}</version>
         </dependency>
 
         <!-- test-related artifacts -->
@@ -42,7 +41,6 @@
 
     <build>
         <sourceDirectory>src/main/scala</sourceDirectory>
-        <testSourceDirectory>src/test/scala</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
@@ -55,10 +53,7 @@
                             <goal>testCompile</goal>
                         </goals>
                         <configuration>
-                            <args>
-                                <arg>-dependencyfile</arg>
-                                <arg>${project.build.directory}/.scala_dependencies</arg>
-                            </args>
+                            <scalaVersion>${scala.version}</scalaVersion>
                         </configuration>
                     </execution>
                 </executions>
@@ -98,9 +93,8 @@
 
         <!-- dependency-related properties -->
         <config.version>1.3.0</config.version>
-        <scala.tools.version>2.11</scala.tools.version>
-        <scala.version>2.11.7</scala.version>
-
+        <scala.version>2.10.4</scala.version>
+        <json4s.version>3.3.0</json4s.version>
     </properties>
 
 </project>
